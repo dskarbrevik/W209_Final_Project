@@ -3,10 +3,23 @@
 <html>
 
 	<head>
+	  <script src="js/jquery-3.1.1.min.js"></script>
 	  
+	  <!-- Always include "bokeh-*.min.js" before "bokeh-widgets-*.min.js" -->
+	  <script src="js/bokeh-0.12.4.min.js"></script>
+	  <script src="js/bokeh-widgets-0.12.4.min.js"></script>
+
 	</head>
 		
 	<body>
+	  
+	  <p>Here is an interactive bokeh viz embedded from an external html file:</p>
+	  <div id="sample-viz"></div>
+	  <br>
+	  <p>Pretty cool... huh?</p>
+	  
+	  <!-- Example script showing how to embed another html file in this one -->
+	  <script> $("#sample-viz").load("sample-interactive-viz.html"); </script> 
 	  
 	</body>
 	
