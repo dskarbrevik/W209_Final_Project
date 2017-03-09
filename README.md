@@ -1,6 +1,6 @@
 # W209_Final_Project
 
-Summary of the folder structure.
+Summary of the folder structure:
 
 There are 6 html pages: the index page, a separate page for each ML model we're working on, and a test page (for testing/sharing ideas without having to worry about screwing up any of the other pages).
 
