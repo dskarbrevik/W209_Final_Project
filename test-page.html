@@ -1,3 +1,29 @@
 <html>
 
+
+	<head>
+	  <script src="libraries/js/jquery-3.1.1.min.js"></script>
+	  
+	  <!-- Always include "bokeh-*.min.js" before "bokeh-widgets-*.min.js" -->
+	  <script src="libraries/js/bokeh-0.12.4.min.js"></script>
+	  <script src="libraries/js/bokeh-widgets-0.12.4.min.js"></script>
+
+	</head>
+		
+	<body>
+	  
+	  <p>Here is an interactive decision surface plot for a decision tree.</p>
+	  <p>The "decision-boundary-example" notebook in the "test-page" folder uses python code from the bokeh library to generate an interactive plot and save it in a separate html file.</p>
+	  <p>We then use a simple jquery script to embed the html from that file inside a div in this file.</p>
+	  <p>Keep in mind that jquery won't work if you simply drop this html file into a web browser; you need to set up a local http server.</p>
+	  <p>The easiest way to do this is to open up a terminal and type "python -m SimpleHTTPServer 8888".</p>
+	  
+	  <div id="decision-boundary"></div>
+	  <!-- Example script showing how to embed another html file in this one -->
+	  <!-- In the future, this script will likely go in an external js file -->
+	  <script> $("#decision-boundary").load( "test-page/decision-boundary.html"); </script> 
+	  
+	</body>
+	
+	
 </html>
