@@ -1,0 +1,26 @@
+body
+{
+  background-color: #334d66;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}
+
+header
+{
+
+}
+
+header #menu-bar
+{
+  padding-top: 0;
+	padding-bottom: 20px;
+}
+
+footer
+{
+  border-top-width: 3px;
+  border-top-style: solid;
+  border-top-color: white;
+  margin-top: 50px;
+  text-align: center;
+}
