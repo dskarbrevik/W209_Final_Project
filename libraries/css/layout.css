@@ -7,13 +7,38 @@ body
 
 header
 {
-
+  
 }
 
-header #menu-bar
+#menu-bar
 {
   padding-top: 0;
-	padding-bottom: 20px;
+	height: 100px;
+}
+
+button
+{
+  height: 50px;
+  width: 125px;
+  background-color: #334d66;
+  border-color: white;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 12px;
+  border-spacing: 100px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+button:hover {
+    background-color: #e09224;
+    border-color: #e09224;
+    color: #334d66;
+    cursor: pointer;
 }
 
 footer
@@ -24,3 +49,4 @@ footer
   margin-top: 50px;
   text-align: center;
 }
+
