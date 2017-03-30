@@ -55,8 +55,8 @@ h6 {
 }
 
 p {
-    color: #FFFFFF;
-    font-family: 'Open Sans', sans-serif;
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	padding-left: 10px;
@@ -65,5 +65,6 @@ p {
 }
 
 a{
-    color: #FFFFFF;
+    color: #e09224;
+    font-weight: bold;
 }

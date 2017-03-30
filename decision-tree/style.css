@@ -1,32 +1,55 @@
-
-.background-div
+header
 {
-  height: 350px;
-  width: 1010px;
   margin: auto;
-  
+  width: 1220px;
 }
 
-.background-div .text
+img
 {
-  margin-top: 10px;
-  height: 350px;
   width: 500px;
+  display: block;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#page-title
+{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  width: 1220px;
+}
+
+.teaching-div
+{
+  height: 550px;
+  width: 1100px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.teaching-div .text
+{
+  margin-right: 10px;
+  width: 600px;
   float: left;
-  border-style: solid;
-  border-width: 2px;
-  background-color: maroon;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.background-div .viz
+.teaching-div .viz
 {
-  margin-top: 10px;
-  height: 350px;
-  width: 500px;
+  height: 500px;
+  width: 400px;
   float: right;
-  border-style: solid;
-  border-width: 2px;
-  background-color: maroon;
+  border-style: none;
+  margin-right: 20px;
 }
 
 .interactive-controls 
@@ -42,10 +65,20 @@
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
-  width: 350px;
+  width: 250px;
   border-width: 2px;
   border-style: solid;
-  background-color: maroon;
+}
+
+.interactive-controls .parameter-controls #depth-slider
+{
+  float: left;
+  text-align: center;
+}
+
+.interactive-controls .parameter-controls #no-max-box
+{
+  text-align: center;
 }
 
 .interactive-controls .vcr-controls
@@ -56,34 +89,50 @@
   width: 500px;
   border-width: 2px;
   border-style: solid;
-  background-color: maroon;  
 }
 
-.model-views
+.interactive-controls .vcr-controls button
 {
-  height: 350px;
+  border-radius: 50%;
+  font-size: 24px;
+  vertical-align: top;
+  height: 60px;
+  width: 60px;
+}
+
+#model-results
+{
+  height: 550px;
   width: 1010px;
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.model-views .decision-surface
+#model-results #decision-surface-container
 {
-  height: 350px;
+  height: 550px;
   width: 500px;
   float: left;
-  border-width: 2px;
-  border-style: solid;
-  background-color: maroon;
 }
 
-.model-views .entropy-chart
+#model-results #decision-surface
 {
-  height: 350px;
-  width: 500px;
-  float: right;
+  height: 500px;
   border-width: 2px;
   border-style: solid;
-  background-color: maroon;
+}
+
+#model-results #accuracy-chart-container
+{
+  height: 550px;
+  width: 500px;
+  float: right;
+}
+
+#model-results #accuracy-chart
+{
+  height: 500px;
+  border-width: 2px;
+  border-style: solid;
 }

@@ -6,12 +6,17 @@
 
   <!-- Style Sheets -->
   <link rel="stylesheet" href="decision-tree/style.css">
+  <link rel="stylesheet" href="libraries/js/bokeh-0.12.4.min.js">
+  <link rel="stylesheet" href="libraries/js/bokeh-widgets-0.12.4.min.js">
   <link rel="stylesheet" href="libraries/css/layout.css">
 	<link rel="stylesheet" href="libraries/css/typography.css">
 
   <!-- JS Scripts -->
+  <script type="text/javascript" src="libraries/js/bokeh-0.12.4.min.js"></script>
+  <script type="text/javascript" src="libraries/js/bokeh-widgets-0.12.4.min.js"></script>
   <script type="text/javascript" src="libraries/js/d3.js"></script>
 	<script type="text/javascript" src="libraries/js/jquery-3.1.1.min.js"></script>
+	<script defer type="text/javascript" src="decision-tree/decision-tree.js"></script>
 </head>
 
 <body>  
@@ -35,62 +40,110 @@
     
     <!-- Page title -->
     <div id = "page-title">
-       <center> <h1>Decision Tree</h1> </center>
+       <center> <u> <h1>Decision Tree</h1> </u></center>
 	  </div>
     
-    <!-- Background section 1 -->
-    <div class = "background-div 1">
-      <div class = "text">
-        <p>Background 1 Text</p>
-      </div>
-      <div class = "viz">
-        <p>Background 1 Viz</p>
-      </div>
-    </div>
+    <div id = "teaching-container">
+    
+      <!-- Teaching section 1 -->
+      <div class = "teaching-div 1">
+        
+<div class = "text">
+          
+<h5>A decision tree is a <a href="https://en.wikipedia.org/wiki/Greedy_algorithm">greedy algorithm</a> that follows a step-wise approach for classifying data points.</h5>
+          
+<h5>In the first step, the decision tree splits the unclassified data set into two sections, and classifies every data point in a given section as the category that makes up a <a href="https://en.wikipedia.org/wiki/Plurality_(voting)">plurality</a> of the points in the section.</h5>
+          
+<h5>The sections themselves are chosen in order to correctly classify as many points as possible.</h5>
+          
+</div>
 
-
-    <!-- Background section 2 -->    
-    <div class = "background-div 2">
-      <div class = "text">
-        <p>Background 2 Text</p>
+        <div class = "viz">
+          <script>$(".teaching-div:nth-child(1) .viz").load("decision-tree/decision-boundary-example-1.html");</script>
+        </div>
+        
       </div>
-      <div class = "viz">
-        <p>Background 2 Viz</p>
+  
+      <!-- Teaching section 2 -->    
+      <div class = "teaching-div 2">
+        <div class = "text">
+          
+          <h5>In the second step, the process is repeated. For each resulting section from the first step, another optimal split is made.</h5>
+          
+          <h5>Once again, every data point in a given section is classified as the category that makes up a pluraliity of the points in the section. Note the <a href="https://en.wikipedia.org/wiki/Geometric_progression">geometric progression</a> in this process. Each classification step creates more new classification sections than the previous step did.</h5>
+          
+        </div>
+        <div class = "viz">
+          <script>$(".teaching-div:nth-child(2) .viz").load("decision-tree/decision-boundary-example-2.html");</script>
+          </div>
       </div>
+      
+      
+      <!-- Teaching section 3 -->
+      <div class = "teaching-div 3">
+        <div class = "text">
+          <h5>This process continues in an iterative fashion until one of the following things happens:</h5> 
+          <h5>A) The pre-defined maximum number of iterations (what we call the maximum tree depth) has been reached.</h5>
+          <h5>B) The tree has converged.</h5>
+        </div>
+        
+        <div class = "viz">
+          <script>$(".teaching-div:nth-child(3) .viz").load("decision-tree/decision-boundary-example-converged.html");</script></div>
+      </div>
+      
+      
+          <!-- Teaching section 4 -->
+      <div class = "teaching-div 4">
+        <div class = "text">
+          <h5>The main advantage of a decision tree classifier is that it is one of the few classifiers where the process itself is easy to visualize. The tree itself can be constructed for an intuitive overview of each decsion at every step.</h5>
+        </div>
+        
+        <div class = "viz">
+          <img src = "decision-tree/decision-tree-example.png">
+        </div>
+      </div>
+      
     </div>
     
-    
-    <!-- Background section 3 -->
-    <div class = "background-div 3">
-      <div class = "text">
-        <p>Background 3 Text</p>
-      </div>
-      <div class = "viz">
-        <p>Background 3 Viz</p>
-      </div>
-    </div>
-    
-    
-    <!-- Training controls -->
+    <!-- Interactive controls -->
     <div class = "interactive-controls">
+      <center><H3>Try it yourself!</H3></center>
+      <center><h5>Train a decision tree on the iris data (using only two features), and see how the decision surface changes with each step. .</h5></center>
       <div class = "parameter-controls">
-        <p>Try it yourself!</p> <br>
-        <p>Parameter 1 Control Widget</p>
-        <p>Parameter 2 Control Widget</p> 
-        <p>Parameter 3 Control Widget</p>
+        <center>Set the maximum tree depth:</center>  
+        <center><input type="range" min="0" max="10"></center>
+        <center><input type="checkbox">  No max</center>
+       
       </div>
       <div class = "vcr-controls">
-        <p>beginning &emsp; step left &emsp; play/pause &emsp; step right &emsp; end </p>
+        <center>
+          <button>&#x25c0;&#x25c0;</button>
+          <button>&#124;&#x25c0;</button>
+          <button>&#9654;</button>
+          <button>&#9654;|</button>
+          <button>&#9654;&#9654;</button>
+        </center>
       </div>
     </div>
     
-    <div class = "model-views">
-      <div class="decision-surface">
-        <p>Decision Surface</p>
+    <div id = "model-results">
+        
+      <div id = "decision-surface-container">
+        <center><u>Decision Surface</u></center>
+        <div id = "decision-surface">
+        </div>
+        
       </div>
-      <div class="entropy-chart">
-        <p>Entropy Chart</p>
+        
+      <div id="accuracy-chart-container">
+        <center><u>Accuracy Chart</u></center>
+        
+        <div id = "accuracy-chart">
+        
+        </div>
+        
       </div>
+      
     </div>
 
   <footer>
