@@ -1,7 +1,7 @@
 header
 {
   margin: auto;
-  width: 1220px;
+  width: 1100px;
 }
 
 img
@@ -19,22 +19,20 @@ img
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
-  width: 1220px;
+  width: 1100px;
 }
 
 .teaching-div
 {
   height: 550px;
-  width: 1100px;
+  width: 1050px;
   margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .teaching-div .text
 {
   margin-right: 10px;
-  width: 600px;
+  width: 500px;
   float: left;
   margin-top: auto;
   margin-bottom: auto;
@@ -60,27 +58,6 @@ img
   width: 1010px;
 }
 
-.interactive-controls .parameter-controls
-{
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 250px;
-  border-width: 2px;
-  border-style: solid;
-}
-
-.interactive-controls .parameter-controls #depth-slider
-{
-  float: left;
-  text-align: center;
-}
-
-.interactive-controls .parameter-controls #no-max-box
-{
-  text-align: center;
-}
-
 .interactive-controls .vcr-controls
 {
   margin-top: 10px;
@@ -103,8 +80,8 @@ img
 #model-results
 {
   height: 550px;
-  width: 1010px;
-  margin-top: 10px;
+  width: 1100px;
+  margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -112,27 +89,27 @@ img
 #model-results #decision-surface-container
 {
   height: 550px;
-  width: 500px;
+  width: 510px;
   float: left;
 }
 
 #model-results #decision-surface
 {
   height: 500px;
-  border-width: 2px;
-  border-style: solid;
+  margin-top: 5px;
+  background-color: white;
 }
 
 #model-results #accuracy-chart-container
 {
   height: 550px;
-  width: 500px;
+  width: 510px;
   float: right;
 }
 
 #model-results #accuracy-chart
 {
   height: 500px;
-  border-width: 2px;
-  border-style: solid;
+  margin-top: 5px;
+  background-color: white;
 }

@@ -29,7 +29,7 @@
     <div id = "menu-bar">
       <center>
         <a href="index.html"><button>Background</button></a>
-        <a href="decision-tree.html"><button>DecisionTree</button></a>
+        <a href="decision-tree.html"><button>Decision<br>Tree</button></a>
         <a href="logistic-regression.html"><button>Logistic<br>Regression</button></a>
         <a href="k-nearest-neighbors.html"><button>K Nearest<br>Neighbors</button></a>
         <a href="k-means.html"><button>K Means</button></a>
@@ -59,7 +59,7 @@
 </div>
 
         <div class = "viz">
-          <script>$(".teaching-div:nth-child(1) .viz").load("decision-tree/decision-boundary-example-1.html");</script>
+          <script>$(".teaching-div:nth-child(1) .viz").load("decision-tree/decision-boundary-depth-1.html");</script>
         </div>
         
       </div>
@@ -74,7 +74,7 @@
           
         </div>
         <div class = "viz">
-          <script>$(".teaching-div:nth-child(2) .viz").load("decision-tree/decision-boundary-example-2.html");</script>
+          <script>$(".teaching-div:nth-child(2) .viz").load("decision-tree/decision-boundary-depth-2.html");</script>
           </div>
       </div>
       
@@ -84,11 +84,11 @@
         <div class = "text">
           <h5>This process continues in an iterative fashion until one of the following things happens:</h5> 
           <h5>A) The pre-defined maximum number of iterations (what we call the maximum tree depth) has been reached.</h5>
-          <h5>B) The tree has converged.</h5>
+          <h5>B) The tree's decision surace (the collection of all sections of identically classified points) has <a href="https://en.wikipedia.org/wiki/Limit_(mathematics)">converged</a>.</h5>
         </div>
         
         <div class = "viz">
-          <script>$(".teaching-div:nth-child(3) .viz").load("decision-tree/decision-boundary-example-converged.html");</script></div>
+          <script>$(".teaching-div:nth-child(3) .viz").load("decision-tree/decision-boundary-converged.html");</script></div>
       </div>
       
       
@@ -104,17 +104,12 @@
       </div>
       
     </div>
-    
+
     <!-- Interactive controls -->
     <div class = "interactive-controls">
       <center><H3>Try it yourself!</H3></center>
-      <center><h5>Train a decision tree on the iris data (using only two features), and see how the decision surface changes with each step. .</h5></center>
-      <div class = "parameter-controls">
-        <center>Set the maximum tree depth:</center>  
-        <center><input type="range" min="0" max="10"></center>
-        <center><input type="checkbox">  No max</center>
-       
-      </div>
+      <center><h5>Use the controls below to see how the accuracy of the decision tree classifier improves as its depth increases .</h5></center>
+      
       <div class = "vcr-controls">
         <center>
           <button>&#x25c0;&#x25c0;</button>
@@ -131,6 +126,8 @@
       <div id = "decision-surface-container">
         <center><u>Decision Surface</u></center>
         <div id = "decision-surface">
+          <script>$("#model-results #decision-surface-container #decision-surface")
+                    .load("decision-tree/decision-boundary-depth-5.html");</script>
         </div>
         
       </div>
@@ -139,7 +136,8 @@
         <center><u>Accuracy Chart</u></center>
         
         <div id = "accuracy-chart">
-        
+        <script>$("#model-results #accuracy-chart-container #accuracy-chart")
+                  .load("decision-tree/accuracy-5.html");</script>
         </div>
         
       </div>
