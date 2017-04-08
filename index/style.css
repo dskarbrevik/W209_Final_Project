@@ -1,0 +1,29 @@
+
+
+
+
+table
+{
+  border-collase: collapse;
+  width: 80%;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+td, th
+{
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+
+img
+{
+	width:200px;
+	height: 200px;
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin: auto;
+}

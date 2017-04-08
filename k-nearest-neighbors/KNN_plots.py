@@ -6,11 +6,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from bokeh.charts import Scatter, output_file, show
-from bokeh.models import ColumnDataSource
+from bokeh.models import ColumnDataSource, CustomJS, Slider
 from bokeh.sampledata.autompg import autompg as df
 from bokeh.io import output_file, show, curdoc
 from bokeh.layouts import widgetbox, layout, gridplot, row
-from bokeh.models.widgets import Slider
+#from bokeh.models.widgets import Slider
 from bokeh.models.mappers import LinearColorMapper
 
 #np.set_printoptions(threshold=np.inf)
@@ -27,6 +27,7 @@ train_labels = iris.target[:120]
 test_data = iris.data[120:,:2]
 test_labels = iris.target[120:]
 
+iris.data
 # split training and test data
 #for x in range(len(iris.data)):	       
 #    if np.random.rand() < .8:	           
@@ -36,48 +37,13 @@ test_labels = iris.target[120:]
 #        test_data = np.append(test_data, iris.data[x])
 #        test_labels = np.append(test_labels, iris.target[x])
 
-#type(train_data)
-#type(train_labels)
-#type(test_data)
-#type(test_labels)
-#
-#def KNN(k_values):
-#    
-#    for k in k_values:
-#        kneighbor = KNeighborsClassifier() # create the classifier
-#        kneighbor.fit(train_data, train_labels) # train the classifier
-#        preds = kneighbor.predict(test_data) # test the classifier
-#    
-#    
-#
-#    print("\n")
-#    print("Diagnoistics for k-nearest neighbor = 1 model:")
-#    print("\n")
-#    target_names = ["setosa", "versicolor", "virginica"]
-#    print(classification_report(test_labels, preds, target_names=target_names))
-#    
-#k_values = [1,2,3,5,7,9]
-#KNN(k_values)
-
 
 #################################################
 # SIMPLY TRAIN THE MODEL
 #################################################
 
-
-kneighbor = KNeighborsClassifier(n_neighbors=100) # create the classifier
-kneighbor.fit(train_data[:,:2], train_labels) # train the classifier
-#preds = kneighbor.predict(test_data) # test the classifier
-
-
-
-
-
-
-# prepare some data
-x = train_data[:, 0]
-y = train_data[:, 1]
-
+x = train_data[:,0]
+y = train_data[:,1]
 
 x_min, x_max = train_data[:, 0].min() - 1, train_data[:, 0].max() + 1
 y_min, y_max = train_data[:, 1].min() - 1, train_data[:, 1].max() + 1
@@ -85,38 +51,55 @@ xx, yy = np.meshgrid(np.arange(x_min, x_max, .001),
                      np.arange(y_min, y_max, .001))
 
 
-Z = kneighbor.predict(np.c_[xx.ravel(), yy.ravel()])
 
-# Put the result into a color plot
-Z = Z.reshape(xx.shape)
+MapData = dict()
 
-cmap_light = ['#FFAAAA', '#AAFFAA', '#AAAAFF']
-cmap_bold = ['#FF0000', '#00FF00', '#0000FF']
+for i in range(10):
+    
+    kneighbor = KNeighborsClassifier(n_neighbors=i+1) # create the classifier
+    kneighbor.fit(train_data, train_labels) # train the classifier
+    
+    Z = kneighbor.predict(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
 
+    MapData[i]=Z
+
+#cmap_light = ['#FFAAAA', '#AAFFAA', '#AAAAFF']
+#cmap_bold = ['#FF0000', '#00FF00', '#0000FF']
+
+MapData['curr']=MapData[0]
+
+type(MapData)
 from bokeh.palettes import Category20
 light_palette = [Category20[6][2*i + 1] for i in range(3)]
 dark_palette = [Category20[6][2*i] for i in range(3)]
 
+
+source = ColumnDataSource(data=MapData)
+
 p = figure()
-p.image(image=[Z],x=x_min, y=y_min, dw=(x_max-x_min), dh=(y_max-y_min), palette=light_palette)
+p.image(image=['curr'], source=source, x=x_min, y=y_min, dw=(x_max-x_min), dh=(y_max-y_min), palette=light_palette)
 
 
-#source = get_contour_data(xx,yy,Z)
-#
-#
-#p = figure()
-#p.multi_line(xs='xs', ys='ys', line_color='line_color', source=source)
 colormap = {0: 'red', 1: 'green', 2: 'blue'}
 colors = [dark_palette[x] for x in train_labels]
 p.circle(x,y, color=colors, radius=.02)
-##show(p)
-#
-slider = widgetbox(Slider(start=0, end=10, value=1, step=1, title="K = ?"))
-##reset_output
+
+
+callback = CustomJS(args=dict(source=source), code="""
+    var data = source.data;
+    var k = cb_obj.value
+    curr = data[k-1]
+    source.trigger('change');
+""")
+
+slider = Slider(start=1, end=10, value=1, step=1, title="k-value", callback=callback)
+#slider.js_on_change('value', callback)
+
 l = row(slider,p,)
 #
 show(l)
 # output to static HTML file
-#output_file("lines.html")
+output_file("knearest.html")
 
 

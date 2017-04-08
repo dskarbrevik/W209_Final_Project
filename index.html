@@ -7,7 +7,7 @@
   <!-- Style Sheets -->
   <link rel="stylesheet" href="index/style.css">
   <link rel="stylesheet" href="libraries/css/layout.css">
-	<link rel="stylesheet" href="libraries/css/typography.css">
+  <link rel="stylesheet" href="libraries/css/typography.css">
 
   <!-- JS Scripts -->
   <script type="text/javascript" src="libraries/js/d3.js"></script>
@@ -33,11 +33,104 @@
     </div>
   </header>
   
-<!-- Page title -->
-<div id = "page-title">
-   <center> <h1>Background</h1> </center>
-</div>
+  <!-- Page title -->
+  <div id = "page-title">
+     <center> <h2>Some Useful Information</h2> </center>
+  </div>
 
+  <div id = "intro">
+    <p>If you're not an expert in machine learning, it's normal to feel overwhelmed by the sheer number of algorithms that can be implemented to solve any given problem. The reason so many algorithms exist is simple: each one has certain pros and cons that allow it to work well for some tasks and poorly for others.</p>
+    <br>
+    <p>We're going to look at four particularly common algorithms in a way that visually expresses their core properties. To do this, we'll be using a dataset known as the Iris dataset. It is a simple table of observations for 3 particular types of flowers.</p>
+    <br>
+    <div id = "flowers">
+      <center>
+        <img src="iris_virginica.jpg" alt="Iris virginica">
+        <img src="iris_versicolor.jpg" alt="Iris versicolor">
+        <img src="iris_setosa.jpg" alt="Iris setosa">
+      </center>
+    </div>
+    <br>
+    <p>Do you think these flowers look similar or different? If I show you a new picture could you tell me which of these three flowers my new picture belongs to? In machine learning this challenge is known as <b>classification</b>. The Iris dataset challenges you further. Instead of looking at pictures of flowers, you're only given the lengths and widths of the sepals and petals of these flowers. Here are three rows directly from the Iris dataset:</p>
+
+    <table>
+      <tr>
+        <th>Record ID</th>
+        <th>Sepal Length (cm)</th>
+        <th>Sepal Width (cm)</th>
+        <th>Petal Length (cm)</th>
+        <th>Petal Width (cm)</th>
+        <th>Flower Type</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>5.1</td>
+        <td>3.5</td>
+        <td>1.4</td>
+        <td>0.2</td>
+        <td>Iris viriginica</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>7.0</td>
+        <td>3.2</td>
+        <td>4.7</td>
+        <td>1.4</td>
+        <td>Iris versicolor</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>6.3</td>
+        <td>3.3</td>
+        <td>6.0</td>
+        <td>2.5</td>
+        <td>Iris setosa</td>
+      </tr>
+    </table> 
+
+    <p>Now can you tell what flower this is?</p>
+
+    <table>
+      <tr>
+        <th>Record ID</th>
+        <th>Sepal Length (cm)</th>
+        <th>Sepal Width (cm)</th>
+        <th>Petal Length (cm)</th>
+        <th>Petal Width (cm)</th>
+        <th>Flower Type</th>  
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5.7</td>
+        <td>3.8</td>
+        <td>1.7</td>
+        <td>0.3</td>
+        <td>??????????</td>
+      </tr>
+    </table>
+
+    <p>Its Iris setosa! Whether you got it right or not, imagine you had a thousand or even a million of these records that you needed to label this same way. The whole Iris dataset is only 150 rows, but even at that number we'd be cringing. Luckily, as you may have guessed, this task is perfect for machine learning algorithms!</p>
+    <br>
+    <p>So back to the plethora of algorithms that might help us with our flower classification task, we can make things easier by dividing all of them up into two categories:</p>
+    <ul>
+      <li><b>Supervised learning algorithms</b> - (e.g. k-nearest neighbors, decision trees)</li>
+      <p>These algorithms make use of prior data to label new data. So we give them some flower records with known labels and based on that, they decide the proper label for new unlabeled flower records.</p> 
+      <li><b>Unsupervised learning algorithms</b> - (e.g. k-means)</li>
+      <p>The big difference for these algorithms is that they don't rely on known examples to label new ones. Imagine I gave you all 150 rows of the Iris dataset without the "flower type" label and asked, "how many flower types are there?". You'd obviously say three because you're familiar with the dataset, but if it were some new kind of dataset, there could be anywhere from 1-150 types of flowers, right? Unsupervised machine learning helps </p>
+    </ul>
+    <br>
+    <p>Now you're ready to dig a little deeper! Click one of the algorithms below to explore a specific algorithm in-depth.</p>
+  </div>
+  <br>
+  <div id = "menu-bar">
+    <center>
+      <a href="index.html"><button>Background</button></a>
+      <a href="decision-tree.html"><button>DecisionTree</button></a>
+      <a href="logistic-regression.html"><button>Logistic<br>Regression</button></a>
+      <a href="k-nearest-neighbors.html"><button>K Nearest<br>Neighbors</button></a>
+      <a href="k-means.html"><button>K Means</button></a>
+    </center>
+  </div>
 
   <footer>
     <p class="white">Copyright 2017 by Sarah Kelley, Brad Putman, and David Skarbrevik.
