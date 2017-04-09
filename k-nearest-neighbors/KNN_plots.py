@@ -13,6 +13,8 @@ from bokeh.layouts import widgetbox, layout, gridplot, row
 #from bokeh.models.widgets import Slider
 from bokeh.models.mappers import LinearColorMapper
 
+
+
 #np.set_printoptions(threshold=np.inf)
 
 # load the data
@@ -22,12 +24,12 @@ iris = datasets.load_iris()
 shuffle = np.random.permutation(np.arange(iris.data.shape[0]))
 iris.data, iris.target = iris.data[shuffle], iris.target[shuffle]
 
-train_data = iris.data[:120,:2]
-train_labels = iris.target[:120]
+train_data = iris.data
+train_labels = iris.target
 test_data = iris.data[120:,:2]
 test_labels = iris.target[120:]
 
-iris.data
+
 # split training and test data
 #for x in range(len(iris.data)):	       
 #    if np.random.rand() < .8:	           
@@ -47,38 +49,32 @@ y = train_data[:,1]
 
 x_min, x_max = train_data[:, 0].min() - 1, train_data[:, 0].max() + 1
 y_min, y_max = train_data[:, 1].min() - 1, train_data[:, 1].max() + 1
-xx, yy = np.meshgrid(np.arange(x_min, x_max, .001),
-                     np.arange(y_min, y_max, .001))
+xx, yy = np.meshgrid(np.arange(x_min, x_max, .01),
+                     np.arange(y_min, y_max, .01))
 
 
 
-MapData = dict()
-
-for i in range(10):
     
-    kneighbor = KNeighborsClassifier(n_neighbors=i+1) # create the classifier
-    kneighbor.fit(train_data, train_labels) # train the classifier
-    
-    Z = kneighbor.predict(np.c_[xx.ravel(), yy.ravel()])
-    Z = Z.reshape(xx.shape)
+kneighbor = KNeighborsClassifier(n_neighbors=10) # create the classifier
+kneighbor.fit(train_data[:,:2], train_labels) # train the classifier
 
-    MapData[i]=Z
+Z = kneighbor.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = Z.reshape(xx.shape)
+
+#np.c_[xx.ravel(), yy.ravel()].shape
 
 #cmap_light = ['#FFAAAA', '#AAFFAA', '#AAAAFF']
 #cmap_bold = ['#FF0000', '#00FF00', '#0000FF']
 
-MapData['curr']=MapData[0]
 
-type(MapData)
 from bokeh.palettes import Category20
 light_palette = [Category20[6][2*i + 1] for i in range(3)]
 dark_palette = [Category20[6][2*i] for i in range(3)]
 
 
-source = ColumnDataSource(data=MapData)
 
 p = figure()
-p.image(image=['curr'], source=source, x=x_min, y=y_min, dw=(x_max-x_min), dh=(y_max-y_min), palette=light_palette)
+p.image(image=[Z], x=x_min, y=y_min, dw=(x_max-x_min), dh=(y_max-y_min), palette=light_palette)
 
 
 colormap = {0: 'red', 1: 'green', 2: 'blue'}
@@ -86,20 +82,22 @@ colors = [dark_palette[x] for x in train_labels]
 p.circle(x,y, color=colors, radius=.02)
 
 
-callback = CustomJS(args=dict(source=source), code="""
-    var data = source.data;
-    var k = cb_obj.value
-    curr = data[k-1]
-    source.trigger('change');
-""")
+#callback = CustomJS(args=dict(source=source), code="""
+#    var data = source.data;
+#    var k = cb_obj.value
+#    curr = data[k-1]
+#    source.trigger('change');
+#""")
 
-slider = Slider(start=1, end=10, value=1, step=1, title="k-value", callback=callback)
-#slider.js_on_change('value', callback)
-
-l = row(slider,p,)
+#slider = Slider(start=1, end=10, value=1, step=1, title="k-value", callback=callback)
+##slider.js_on_change('value', callback)
 #
-show(l)
+#l = row(slider,p,)
+##
+#show(l)
 # output to static HTML file
-output_file("knearest.html")
+
+show(p)
+output_file("knearest10.html")
 
 
