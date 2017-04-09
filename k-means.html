@@ -30,7 +30,7 @@
       <center>
         <a href="index.html"><button>Background</button></a>
         <a href="decision-tree.html"><button>Decision<br>Tree</button></a>
-        <a href="logistic-regression.html"><button>Logistic<br>Regression</button></a>
+        <!-- <a href="logistic-regression.html"><button>Logistic<br>Regression</button></a> -->
         <a href="k-nearest-neighbors.html"><button>K Nearest<br>Neighbors</button></a>
         <a href="k-means.html"><button>K Means</button></a>
       </center>
@@ -40,7 +40,7 @@
     
     <!-- Page title -->
     <div id = "page-title">
-       <center> <u> <h1>KMeans-2</h1> </u></center>
+       <center> <u> <h1>KMeans</h1> </u></center>
 	  </div>
     
     <div id = "teaching-container">
@@ -100,20 +100,23 @@
     <!-- Interactive controls -->
     <div class = "interactive-controls">
       <center><H3>Try it yourself!</H3></center>
-      <center><h5>Use the controls below to see how the accuracy of the K Means Algorithm increases as it goes through iterations .</h5></center>
+      <center><h5>Use the controls below to see how the accuracy of the K Means Algorithm changes with each iteration.</h5></center>
 
       <script type="text/javascript">
-        var kmeans_images = new Array( "k-means/kmeans-iterations-0.html",
-                "k-means/kmeans-iterations-1.html", 
-                "k-means/kmeans-iterations-2.html",
-                 "k-means/kmeans-iterations-3.html",
-                "k-means/kmeans-iterations-4.html",
-                "k-means/kmeans-iterations-5.html",
-                "k-means/kmeans-iterations-6.html",
-                "k-means/kmeans-iterations-7.html",
-                "k-means/kmeans-iterations-8.html",
-                "k-means/kmeans-iterations-9.html");
-        var accuracy_images = new Array("k-means/accuracy-1.html",
+        var boundary_plots = new Array( 
+          "k-means/kmeans-iterations-0.html",
+          "k-means/kmeans-iterations-1.html", 
+          "k-means/kmeans-iterations-2.html",
+          "k-means/kmeans-iterations-3.html",
+          "k-means/kmeans-iterations-4.html",
+          "k-means/kmeans-iterations-5.html",
+          "k-means/kmeans-iterations-6.html",
+          "k-means/kmeans-iterations-7.html",
+          "k-means/kmeans-iterations-8.html",
+          "k-means/kmeans-iterations-9.html");
+          
+        var accuracy_plots = new Array(
+          "k-means/accuracy-1.html",
           "k-means/accuracy-2.html",
           "k-means/accuracy-3.html",
           "k-means/accuracy-4.html",
@@ -124,55 +127,74 @@
           "k-means/accuracy-9.html",
           "k-means/accuracy-10.html"
           );
+          
         var update_num = 0;
-        function play(){
-          while (update_num < kmeans_images.length){
+        
+        function play()
+        {
+          while (update_num < boundary_plots.length){
             setTimeout(advanceone(), 2000);
             //setTimeout(advanceone, 2000);
           }
         }
-        function advanceone(){
-          if (update_num < kmeans_images.length){
+        
+        function advanceone()
+        {
+          if (update_num < boundary_plots.length)
+          {
             update_num +=1;
-          } else {
-            update_num = update_num;
+      
+            $("#model-results #decision-surface-container #decision-surface")
+                .load(boundary_plots[update_num]);
+                
+            $("#model-results #accuracy-chart-container #accuracy-chart")
+                .load(accuracy_plots[update_num]);
           }
-          $("#model-results #decision-surface-container #decision-surface")
-        .load(kmeans_images[update_num]);
-        $("#model-results #accuracy-chart-container #accuracy-chart")
-        .load(accuracy_images[update_num]);
         }
-        function decreaseone(){
-          if (update_num > 0){
+        
+        function decreaseone()
+        {
+          if (update_num > 0)
+          {
             update_num -=1;
-          } else {
-            update_num = update_num;
+        
+            $("#model-results #decision-surface-container #decision-surface")
+                .load(boundary_plots[update_num]);
+        
+            $("#model-results #accuracy-chart-container #accuracy-chart")
+              .load(accuracy_plots[update_num]);
           }
-          $("#model-results #decision-surface-container #decision-surface")
-        .load(kmeans_images[update_num]);
-          $("#model-results #accuracy-chart-container #accuracy-chart")
-        .load(accuracy_images[update_num]);
-      }
-        function toend(){
-          $("#model-results #decision-surface-container #decision-surface")
-        .load(kmeans_images[kmeans_images.length -1]);
-          $("#model-results #accuracy-chart-container #accuracy-chart")
-        .load(accuracy_images[accuracy_images.length -1]);
         }
-        function tostart(){
+      
+        function toend()
+        {
+          update_num = (boundary_plots.length - 1)
+          
           $("#model-results #decision-surface-container #decision-surface")
-        .load(kmeans_images[0]);
+              .load(boundary_plots[boundary_plots.length -1]);
+          
           $("#model-results #accuracy-chart-container #accuracy-chart")
-        .load(accuracy_images[accuracy_images.length -1]);
+              .load(accuracy_plots[accuracy_plots.length -1]);
         }
+        
+        function tostart()
+        {
+          update_num = 0
+          
+          $("#model-results #decision-surface-container #decision-surface")
+              .load(boundary_plots[0]);
+          
+          $("#model-results #accuracy-chart-container #accuracy-chart")
+              .load(accuracy_plots[0]);
+        }
+        
       </script>
 
-      
       <div class = "vcr-controls">
         <center>
           <button onclick = 'tostart()'>&#x25c0;&#x25c0;</button>
           <button onclick = 'decreaseone()'>&#124;&#x25c0;</button>
-          <button onclick = 'play()' >&#9654;</button>
+          <!-- <button onclick = 'play()' >&#9654;</button> -->
           <button onclick = 'advanceone()'>&#9654;|</button>
           <button onclick = 'toend()'>&#9654;&#9654;</button>
         </center>
@@ -185,7 +207,7 @@
         <center><u>Existing Clusters</u></center>
         <div id = "decision-surface">
         <script>$("#model-results #decision-surface-container #decision-surface")
-        .load("k-means/kmeans-iterations-0.html");</script>
+        .load(boundary_plots[0]);</script>
         </div>
         
       </div>
@@ -195,7 +217,7 @@
         
         <div id = "accuracy-chart">
         <script>$("#model-results #accuracy-chart-container #accuracy-chart")
-                  .load("k-means/accuracy-1.html");</script>
+                  .load(accuracy_plots[0]);</script>
         </div>
         
       </div>

@@ -30,7 +30,7 @@
       <center>
         <a href="index.html"><button>Background</button></a>
         <a href="decision-tree.html"><button>Decision<br>Tree</button></a>
-        <a href="logistic-regression.html"><button>Logistic<br>Regression</button></a>
+        <!-- <a href="logistic-regression.html"><button>Logistic<br>Regression</button></a> -->
         <a href="k-nearest-neighbors.html"><button>K Nearest<br>Neighbors</button></a>
         <a href="k-means.html"><button>K Means</button></a>
       </center>
@@ -40,7 +40,7 @@
     
     <!-- Page title -->
     <div id = "page-title">
-       <center> <u> <h1>K-Nearest Neighbor</h1> </u></center>
+       <center> <u> <h1>K-Nearest Neighbors</h1> </u></center>
     </div>
     
     <div id = "teaching-container">
@@ -55,7 +55,8 @@
         </div>
 
         <div class = "viz">
-          <script>$(".teaching-div:nth-child(1) .viz").load("k-nearest-neighbors/knn_lesson1.html");</script>
+          <!-- <script>$(".teaching-div:nth-child(1) .viz").load("k-nearest-neighbors/knn_lesson1.html");</script> -->
+          <script>$(".teaching-div:nth-child(1) .viz").load("k-nearest-neighbors/knn1.html");</script>
         </div>
         
       </div>
@@ -70,7 +71,8 @@
 
         </div>
         <div class = "viz">
-          <script>$(".teaching-div:nth-child(2) .viz").load("k-nearest-neighbors/knn_lesson2.html");</script>
+          <!-- <script>$(".teaching-div:nth-child(2) .viz").load("k-nearest-neighbors/knn_lesson2.html");</script> -->
+          <script>$(".teaching-div:nth-child(2) .viz").load("k-nearest-neighbors/knn2.html");</script>
           </div>
       </div>
       
@@ -87,7 +89,9 @@
         </div>
         
         <div class = "viz">
-          <script>$(".teaching-div:nth-child(3) .viz").load("k-nearest-neighbors/knn_lesson3.html");</script></div>
+          <!-- <script>$(".teaching-div:nth-child(3) .viz").load("k-nearest-neighbors/knn_lesson3.html");</script></div> -->
+          
+          <script>$(".teaching-div:nth-child(3) .viz").load("k-nearest-neighbors/knn3.html");</script>
       </div>
       
     
@@ -100,17 +104,20 @@
       <center><h5>Now, looking at the full Iris dataset, use the controls below to see how the accuracy of the K-Nearest Kneighbors algorithm changes with different K values.</h5></center>
 
       <script type="text/javascript">
-        var knn_images = new Array( "k-nearest-neighbors/knn1.html",
+        var boundary_plots = new Array( 
+          "k-nearest-neighbors/knn1.html",
           "k-nearest-neighbors/knn2.html", 
           "k-nearest-neighbors/knn3.html",
-           "k-nearest-neighbors/knn4.html",
+          "k-nearest-neighbors/knn4.html",
           "k-nearest-neighbors/knn5.html",
           "k-nearest-neighbors/knn6.html",
           "k-nearest-neighbors/knn7.html",
           "k-nearest-neighbors/knn8.html",
           "k-nearest-neighbors/knn9.html",
           "k-nearest-neighbors/knn10.html");
-        var accuracy_images = new Array("k-nearest-neighbors/accuracy-1.html",
+          
+        var accuracy_plots = new Array(
+          "k-nearest-neighbors/accuracy-1.html",
           "k-nearest-neighbors/accuracy-2.html",
           "k-nearest-neighbors/accuracy-3.html",
           "k-nearest-neighbors/accuracy-4.html",
@@ -121,47 +128,66 @@
           "k-nearest-neighbors/accuracy-9.html",
           "k-nearest-neighbors/accuracy-10.html"
           );
+          
         var update_num = 0;
-        function play(){
-          while (update_num < knn_images.length){
+        
+        function play()
+        {
+          while (update_num < boundary_plots.length){
             setTimeout(advanceone(), 2000);
             //setTimeout(advanceone, 2000);
           }
         }
+        
         function advanceone(){
-          if (update_num < knn_images.length){
+          if (update_num < boundary_plots.length)
+          {
             update_num +=1;
-          } else {
-            update_num = update_num;
+          
+            $("#model-results #decision-surface-container #decision-surface")
+                .load(boundary_plots[update_num]);
+                
+            $("#model-results #accuracy-chart-container #accuracy-chart")
+                .load(accuracy_plots[update_num]);
           }
-          $("#model-results #decision-surface-container #decision-surface")
-        .load(knn_images[update_num]);
-        $("#model-results #accuracy-chart-container #accuracy-chart")
-        .load(accuracy_images[update_num]);
         }
-        function decreaseone(){
-          if (update_num > 0){
+        
+        function decreaseone()
+        {
+          if (update_num > 0)
+          {
             update_num -=1;
-          } else {
-            update_num = update_num;
+          
+            $("#model-results #decision-surface-container #decision-surface")
+                .load(boundary_plots[update_num]);
+        
+            $("#model-results #accuracy-chart-container #accuracy-chart")
+                .load(accuracy_plots[update_num]);
           }
-          $("#model-results #decision-surface-container #decision-surface")
-        .load(knn_images[update_num]);
-          $("#model-results #accuracy-chart-container #accuracy-chart")
-        .load(accuracy_images[update_num]);
-      }
-        function toend(){
-          $("#model-results #decision-surface-container #decision-surface")
-        .load(knn_images[knn_images.length -1]);
-          $("#model-results #accuracy-chart-container #accuracy-chart")
-        .load(accuracy_images[accuracy_images.length -1]);
         }
-        function tostart(){
+        
+        function toend()
+        {
+          update_num = (boundary_plots.length - 1)
+          
           $("#model-results #decision-surface-container #decision-surface")
-        .load(knn_images[0]);
+              .load(boundary_plots[boundary_plots.length -1]);
+              
           $("#model-results #accuracy-chart-container #accuracy-chart")
-        .load(accuracy_images[accuracy_images.length -1]);
+              .load(accuracy_plots[accuracy_plots.length -1]);
         }
+        
+        function tostart()
+        {
+          update_num = 0
+          
+          $("#model-results #decision-surface-container #decision-surface")
+              .load(boundary_plots[0]);
+              
+          $("#model-results #accuracy-chart-container #accuracy-chart")
+              .load(accuracy_plots[0]);
+        }
+        
       </script>
 
       
@@ -169,7 +195,7 @@
         <center>
           <button onclick = 'tostart()'>&#x25c0;&#x25c0;</button>
           <button onclick = 'decreaseone()'>&#124;&#x25c0;</button>
-          <button onclick = 'play()' >&#9654;</button>
+          <!-- <button onclick = 'play()' >&#9654;</button> -->
           <button onclick = 'advanceone()'>&#9654;|</button>
           <button onclick = 'toend()'>&#9654;&#9654;</button>
         </center>

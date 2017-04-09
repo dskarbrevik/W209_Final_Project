@@ -30,7 +30,7 @@
       <center>
         <a href="index.html"><button>Background</button></a>
         <a href="decision-tree.html"><button>Decision<br>Tree</button></a>
-        <a href="logistic-regression.html"><button>Logistic<br>Regression</button></a>
+        <!-- <a href="logistic-regression.html"><button>Logistic<br>Regression</button></a> -->
         <a href="k-nearest-neighbors.html"><button>K Nearest<br>Neighbors</button></a>
         <a href="k-means.html"><button>K Means</button></a>
       </center>
@@ -108,17 +108,114 @@
     <!-- Interactive controls -->
     <div class = "interactive-controls">
       <center><H3>Try it yourself!</H3></center>
-      <center><h5>Use the controls below to see how the accuracy of the decision tree classifier improves as its depth increases .</h5></center>
+      <center><h5>Use the controls below to see how the accuracy of the decision tree classifier improves as its depth increases.</h5></center>
+      
+      <script type="text/javascript">
+        var boundary_plots = new Array( 
+          "decision-tree/decision-boundary-depth-0.html",
+          "decision-tree/decision-boundary-depth-1.html",
+          "decision-tree/decision-boundary-depth-2.html",
+          "decision-tree/decision-boundary-depth-3.html",
+          "decision-tree/decision-boundary-depth-4.html",
+          "decision-tree/decision-boundary-depth-5.html",
+          "decision-tree/decision-boundary-depth-6.html",
+          "decision-tree/decision-boundary-depth-7.html",
+          "decision-tree/decision-boundary-depth-8.html",
+          "decision-tree/decision-boundary-depth-9.html",
+          "decision-tree/decision-boundary-depth-10.html",
+          "decision-tree/decision-boundary-depth-11.html",
+          "decision-tree/decision-boundary-depth-12.html");
+          
+        var accuracy_plots = new Array(
+          "decision-tree/accuracy-0.html",
+          "decision-tree/accuracy-1.html",
+          "decision-tree/accuracy-2.html",
+          "decision-tree/accuracy-3.html",
+          "decision-tree/accuracy-4.html",
+          "decision-tree/accuracy-5.html",
+          "decision-tree/accuracy-6.html",
+          "decision-tree/accuracy-7.html",
+          "decision-tree/accuracy-8.html",
+          "decision-tree/accuracy-9.html",
+          "decision-tree/accuracy-10.html",
+          "decision-tree/accuracy-11.html",
+          "decision-tree/accuracy-12.html");
+         
+        var update_num = 0;
+        
+        function play()
+        {
+          while (update_num < boundary_plots.length)
+          {
+            setTimeout(advanceone(), 2000);
+          }
+        }
+        
+        function advanceone()
+        {
+          if (update_num < boundary_plots.length)
+          {
+            update_num += 1;
+            
+            $("#model-results #decision-surface-container #decision-surface")
+              .load(boundary_plots[update_num]);
+              
+            $("#model-results #accuracy-chart-container #accuracy-chart")
+              .load(accuracy_plots[update_num]);
+          } 
+
+        }
+        
+        function decreaseone()
+        {
+          if (update_num > 0)
+          {              
+            update_num -= 1;
+            
+            $("#model-results #decision-surface-container #decision-surface")
+              .load(boundary_plots[update_num]);
+              
+            $("#model-results #accuracy-chart-container #accuracy-chart")
+              .load(accuracy_plots[update_num]);
+          } 
+
+        }
+        
+        function toend()
+        {
+          update_num = (boundary_plots.length - 1)
+          
+          $("#model-results #decision-surface-container #decision-surface")
+              .load(boundary_plots[boundary_plots.length -1]);
+              
+          $("#model-results #accuracy-chart-container #accuracy-chart")
+              .load(accuracy_plots[accuracy_plots.length -1]);
+        }
+        
+        function tostart()
+        {
+          update_num = 0
+          
+          $("#model-results #decision-surface-container #decision-surface")
+              .load(boundary_plots[0]);
+              
+          $("#model-results #accuracy-chart-container #accuracy-chart")
+            .load(accuracy_plots[0]);
+        }
+        
+      </script>
+
       
       <div class = "vcr-controls">
         <center>
-          <button>&#x25c0;&#x25c0;</button>
-          <button>&#124;&#x25c0;</button>
-          <button>&#9654;</button>
-          <button>&#9654;|</button>
-          <button>&#9654;&#9654;</button>
+          <button onclick = 'tostart()'>&#x25c0;&#x25c0;</button>
+          <button onclick = 'decreaseone()'>&#124;&#x25c0;</button>
+          <!-- <button onclick = 'play()' >&#9654;</button> -->
+          <button onclick = 'advanceone()'>&#9654;|</button>
+          <button onclick = 'toend()'>&#9654;&#9654;</button>
         </center>
       </div>
+      
     </div>
     
     <div id = "model-results">
@@ -127,7 +224,7 @@
         <center><u>Decision Surface</u></center>
         <div id = "decision-surface">
           <script>$("#model-results #decision-surface-container #decision-surface")
-                    .load("decision-tree/decision-boundary-depth-5.html");</script>
+                    .load(boundary_plots[update_num]);</script>
         </div>
         
       </div>
@@ -137,7 +234,7 @@
         
         <div id = "accuracy-chart">
         <script>$("#model-results #accuracy-chart-container #accuracy-chart")
-                  .load("decision-tree/accuracy-5.html");</script>
+                  .load(accuracy_plots[update_num]);</script>
         </div>
         
       </div>
