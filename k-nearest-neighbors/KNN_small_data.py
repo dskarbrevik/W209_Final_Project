@@ -17,25 +17,28 @@ from sklearn.datasets import load_iris
 # Load iris data
 iris = load_iris()
 
-np.random.seed(1)
+#np.random.seed(1)
 
-shuffle = np.random.permutation(np.arange(iris.data.shape[0]))
-iris.data, iris.target = iris.data[shuffle], iris.target[shuffle]
+#shuffle = np.random.permutation(np.arange(iris.data.shape[0]))
+#iris.data, iris.target = iris.data[shuffle], iris.target[shuffle]
 
-trainingData = iris.data
+#trainingData = iris.data
 featureNames = iris.feature_names
-trainingLabels = iris.target
+#trainingLabels = iris.target
 labelNames = iris.target_names
 
 
-num_samples = 40
-small_data = np.zeros([num_samples,2])
-small_labels = np.zeros([num_samples,])
-for i in range(num_samples):
-    small_data[i][0] = trainingData[i][0]
-    small_data[i][1] = trainingData[i][1]
-    small_labels[i] = trainingLabels[i]
+#select_data = [1,12,18,20,25,36,42,55,61,62,73,85,89,95,103,112,127,129,132,144,148]
+select_data = [1,3,5,8,12,13,16,18,20,25,32,36,42,43,
+               51,52,55,61,62,63,73,79,85,87,89,90,95,96,
+               103,104,107,112,115,119,122,124,127,129,132,138,144,148]
 
+small_data = np.zeros([42,2])
+small_labels = np.zeros([42,])
+for i,j in zip(list(range(42)),select_data):
+    small_data[i][0] = iris.data[j][0]
+    small_data[i][1] = iris.data[j][1]
+    small_labels[i] = iris.target[j]
 
 # Bucket the training data points by training label (i.e. setosa, versicolor or virginica)
 # This will make it easier to generate a legend for the plot
@@ -63,7 +66,7 @@ boundary_y_min = min([dataPoint[1] for dataPoint in small_data]) - 1
 boundary_y_max = max([dataPoint[1] for dataPoint in small_data]) + 1
 boundary_y_range = Range1d(boundary_y_min, boundary_y_max, bounds = (boundary_y_min, boundary_y_max))
 
-k_val=1
+k_val=2
 model = KNeighborsClassifier(n_neighbors=k_val) # create the classifier
 X = [ [ dataPoint[0], dataPoint[1] ] for dataPoint in small_data]
 y = small_labels
@@ -80,8 +83,7 @@ zz = z.reshape(xx.shape)
 bokeh_plot = figure(plot_width=500,
                     plot_height=500,
                     x_range = boundary_x_range,
-                    y_range = boundary_y_range, 
-                    tools="pan,wheel_zoom,box_zoom, reset"
+                    y_range = boundary_y_range
                     )
 
 # Plot the mesh grid on the bokeh figure as an image
@@ -96,8 +98,8 @@ bokeh_plot.image(image=[zz],
                 )
 
 # Plot data points in the label_0 bucket
-bokeh_plot.circle([trainingData[i][0] for i in label_0], 
-                  [trainingData[i][1] for i in label_0],
+bokeh_plot.circle([small_data[i][0] for i in label_0], 
+                  [small_data[i][1] for i in label_0],
                   size = 6,
                   fill_color = dark_palette[0],
                   line_color = dark_palette[0],
@@ -105,8 +107,8 @@ bokeh_plot.circle([trainingData[i][0] for i in label_0],
                  )
 
 # Plot data points in the label_1 bucket
-bokeh_plot.circle([trainingData[i][0] for i in label_1], 
-                  [trainingData[i][1] for i in label_1],
+bokeh_plot.circle([small_data[i][0] for i in label_1], 
+                  [small_data[i][1] for i in label_1],
                   size = 6,
                   fill_color = dark_palette[1],
                   line_color = dark_palette[1],
@@ -114,8 +116,8 @@ bokeh_plot.circle([trainingData[i][0] for i in label_1],
                  )
 
 # Plot data points in the label_2 bucket
-bokeh_plot.circle([trainingData[i][0] for i in label_2], 
-                  [trainingData[i][1] for i in label_2],
+bokeh_plot.circle([small_data[i][0] for i in label_2], 
+                  [small_data[i][1] for i in label_2],
                   size = 6,
                   fill_color = dark_palette[2],
                   line_color = dark_palette[2],
@@ -126,8 +128,8 @@ bokeh_plot.circle([trainingData[i][0] for i in label_2],
 bokeh_plot.xaxis.axis_label = featureNames[0]
 bokeh_plot.yaxis.axis_label = featureNames[1]
 bokeh_plot.legend.location = "bottom_left"
-title = "{}-NN model with more data".format(k_val)
+title = "{}-NN model with twice the amount of data".format(k_val)
 bokeh_plot.title.text = title
 
-output_file("knn_lessontest.html")
-show(bokeh_plot)
+output_file("knn_lesson3.html")
+save(bokeh_plot)

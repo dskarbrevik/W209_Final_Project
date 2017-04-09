@@ -49,7 +49,7 @@ boundary_y_range = Range1d(boundary_y_min, boundary_y_max, bounds = (boundary_y_
 file_names = ["knn1.html","knn2.html","knn3.html","knn4.html","knn5.html",
               "knn6.html","knn7.html","knn8.html","knn9.html","knn10.html"]
 nums = [1,2,3,4,5,6,7,8,9,10]
-for j, name in zip(nums, file_names):
+for j in nums:
     # Train a model on the first two features
     model = KNeighborsClassifier(n_neighbors=j) # create the classifier
     X = [ [ dataPoint[0], dataPoint[1] ] for dataPoint in trainingData]
@@ -115,6 +115,6 @@ for j, name in zip(nums, file_names):
     title = "When K = {}".format(j)
     bokeh_plot.title.text = title
 
-    output_file(name)
+    output_file("test{}.html".format(j))
     save(bokeh_plot)
 

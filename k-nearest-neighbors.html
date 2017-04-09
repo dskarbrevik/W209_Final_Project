@@ -66,7 +66,8 @@
         <div class = "text">
           
           <h5>The "k" in k-NN refers to how many neighbors should be considered. In the previous example we had a 1-NN model, meaning we only looked for the single closest neighbor when deciding what to call a new unknown flower.</h5>
-          <h5>In the plot here, we have the exact same data as before, but because this is now a 2-NN model we're considering the two nearest neighbors for any new data point.</h5>
+          <h5>In the plot here, we have the exact same data as before, but because this is now a 2-NN model we're looking for the two nearest neighbors and taking a vote to decide what label to choose. For example, if the two nearest neighbors are both setosa, then our new data point will be labeled setosa as well.</h5> 
+          <h5>However, an issue arises if the two neighbors are different (i.e. a tie situation). Notice that two of the virginica data points would be incorrectly labeled by our 2-NN model. What would we label those two points if we instead chose a 3-NN model?</h5>
 
 
         </div>
@@ -82,8 +83,8 @@
         <div class = "text">
 
 
-          <h5>Now (still with a 2-NN model) we've doubled the amount of known data. Notice the decision boundary has become more jagged. If we switched to a 1-NN model would the boundaries be more or less jagged than this?</h5>
-          <h5>Also, notice that two of the virginica data points would be incorrectly labeled by our 2-NN model. Would they be mislabeled if this were a 1-NN model?</h5>
+          <h5>Still with a 2-NN model, we've doubled the amount of known data. Notice the decision boundary has become more jagged. If we switched to a 1-NN model would the boundaries be more or less jagged than this?</h5>
+          <h5>Also, notice there are more known data points that would be incorrectly labeled by our decision boundary. Does it make sense why our 2-NN model would choose to make the decision boundary the way it did around those points?</h5>
 
 
         </div>
