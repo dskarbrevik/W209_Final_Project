@@ -182,46 +182,15 @@
                 .load(accuracy_plots[index]);
           }
         }
-        
-        function play()
-        {
-          /* Toggle play button */
-          paused = !(paused);
-          
-          var timeouts = []
-          
-          /* Play functionality */
-          if (paused == false)
-          {
-            $(".vcr-controls button:nth-child(3)").text("| |");
-            for (i = index + 1; i < boundary_plots.length - 1; i++)
-            {
-              (function(k){timeouts.push(setTimeout(handleTimeouts(k) , 2000 * (k-1) ));})(i); 
-            }
-          }
-          
-          /* Pause functionality */
-          else
-          {
-            $(".vcr-controls button:nth-child(3)").text(String.fromCharCode(9654));
-          }
-        }
-        
-        function handleTimeouts(newTimeoutIndex)
-        {
-          if (paused == false) {updateIndex(newTimeoutIndex);}
-        }
-        
         </script>
 
       
       <div class = "vcr-controls">
         <center>
-          <button onclick = 'tostart()'>&#x25c0;&#x25c0;</button>
-          <button onclick = 'decreaseone()'>&#124;&#x25c0;</button>
-          <button onclick = 'play()' >&#9654;</button>
-          <button onclick = 'advanceone()'>&#9654;|</button>
-          <button onclick = 'toend()'>&#9654;&#9654;</button>
+          <button onclick = 'tostart()'>|&#x25c0;</button>
+          <button onclick = 'decreaseone()'>&#x25c0;</button>
+          <button onclick = 'advanceone()'>&#9654;</button>
+          <button onclick = 'toend()'>&#9654;|</button>
         </center>
       </div>
       
