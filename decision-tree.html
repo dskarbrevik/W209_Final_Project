@@ -5,7 +5,6 @@
 	<title>A Visual Introduction To Machine Learning</title>
 
   <!-- Style Sheets -->
-  <link rel="stylesheet" href="decision-tree/style.css">
   <link rel="stylesheet" href="libraries/js/bokeh-0.12.4.min.js">
   <link rel="stylesheet" href="libraries/js/bokeh-widgets-0.12.4.min.js">
   <link rel="stylesheet" href="libraries/css/layout.css">
@@ -16,7 +15,6 @@
   <script type="text/javascript" src="libraries/js/bokeh-widgets-0.12.4.min.js"></script>
   <script type="text/javascript" src="libraries/js/d3.js"></script>
 	<script type="text/javascript" src="libraries/js/jquery-3.1.1.min.js"></script>
-	<script defer type="text/javascript" src="decision-tree/decision-tree.js"></script>
 </head>
 
 <body>  
@@ -26,11 +24,10 @@
       <h2>A Visual Introduction To Machine Learning</h2>
     </div>
 
-    <div id = "menu-bar">
+    <div id = "top-menu-bar">
       <center>
         <a href="index.html"><button>Background</button></a>
         <a href="decision-tree.html"><button>Decision<br>Tree</button></a>
-        <!-- <a href="logistic-regression.html"><button>Logistic<br>Regression</button></a> -->
         <a href="k-nearest-neighbors.html"><button>K Nearest<br>Neighbors</button></a>
         <a href="k-means.html"><button>K Means</button></a>
       </center>
@@ -59,7 +56,12 @@
 </div>
 
         <div class = "viz">
-          <script>$(".teaching-div:nth-child(1) .viz").load("decision-tree/decision-boundary-depth-1.html");</script>
+          <script> 
+          $(document).ready(function()
+          {
+            $(".teaching-div:nth-child(1) .viz").load("decision-tree/decision-boundary-depth-1.html");
+          });
+          </script>
         </div>
         
       </div>
@@ -141,76 +143,83 @@
           "decision-tree/accuracy-11.html",
           "decision-tree/accuracy-12.html");
          
-        var update_num = 0;
-        
-        function play()
+        var index = 0;
+        var paused = true;
+      
+        function tostart() 
         {
-          while (update_num < boundary_plots.length)
-          {
-            setTimeout(advanceone(), 2000);
-          }
-        }
-        
-        function advanceone()
-        {
-          if (update_num < boundary_plots.length)
-          {
-            update_num += 1;
-            
-            $("#model-results #decision-surface-container #decision-surface")
-              .load(boundary_plots[update_num]);
-              
-            $("#model-results #accuracy-chart-container #accuracy-chart")
-              .load(accuracy_plots[update_num]);
-          } 
-
+          updateIndex(0);
+          paused = true;
         }
         
         function decreaseone()
         {
-          if (update_num > 0)
-          {              
-            update_num -= 1;
-            
-            $("#model-results #decision-surface-container #decision-surface")
-              .load(boundary_plots[update_num]);
-              
-            $("#model-results #accuracy-chart-container #accuracy-chart")
-              .load(accuracy_plots[update_num]);
-          } 
+          updateIndex(index - 1);
+          pause = true;
+        }
+        
+        function advanceone()
+        {
+          updateIndex(index + 1);
+          pause = true;
+        }
+        
+        function toend() 
+        {
+          updateIndex(boundary_plots.length - 1);
+          pause = true;
+        }
 
-        }
-        
-        function toend()
+        function updateIndex(i)
         {
-          update_num = (boundary_plots.length - 1)
-          
-          $("#model-results #decision-surface-container #decision-surface")
-              .load(boundary_plots[boundary_plots.length -1]);
-              
-          $("#model-results #accuracy-chart-container #accuracy-chart")
-              .load(accuracy_plots[accuracy_plots.length -1]);
+          if ( (i >= 0) && (i < boundary_plots.length))
+          {
+            index = i;
+            $("#model-results #decision-surface-container #decision-surface")
+                .load(boundary_plots[index]);
+                
+            $("#model-results #accuracy-chart-container #accuracy-chart")
+                .load(accuracy_plots[index]);
+          }
         }
         
-        function tostart()
+        function play()
         {
-          update_num = 0
+          /* Toggle play button */
+          paused = !(paused);
           
-          $("#model-results #decision-surface-container #decision-surface")
-              .load(boundary_plots[0]);
-              
-          $("#model-results #accuracy-chart-container #accuracy-chart")
-            .load(accuracy_plots[0]);
+          var timeouts = []
+          
+          /* Play functionality */
+          if (paused == false)
+          {
+            $(".vcr-controls button:nth-child(3)").text("| |");
+            for (i = index + 1; i < boundary_plots.length - 1; i++)
+            {
+              (function(k){timeouts.push(setTimeout(handleTimeouts(k) , 2000 * (k-1) ));})(i); 
+            }
+          }
+          
+          /* Pause functionality */
+          else
+          {
+            $(".vcr-controls button:nth-child(3)").text(String.fromCharCode(9654));
+          }
         }
         
-      </script>
+        function handleTimeouts(newTimeoutIndex)
+        {
+          if (paused == false) {updateIndex(newTimeoutIndex);}
+        }
+        
+        </script>
 
       
       <div class = "vcr-controls">
         <center>
           <button onclick = 'tostart()'>&#x25c0;&#x25c0;</button>
           <button onclick = 'decreaseone()'>&#124;&#x25c0;</button>
-          <!-- <button onclick = 'play()' >&#9654;</button> -->
+          <button onclick = 'play()' >&#9654;</button>
           <button onclick = 'advanceone()'>&#9654;|</button>
           <button onclick = 'toend()'>&#9654;&#9654;</button>
         </center>
@@ -224,7 +233,7 @@
         <center><u>Decision Surface</u></center>
         <div id = "decision-surface">
           <script>$("#model-results #decision-surface-container #decision-surface")
-                    .load(boundary_plots[update_num]);</script>
+                    .load(boundary_plots[index]);</script>
         </div>
         
       </div>
@@ -234,13 +243,22 @@
         
         <div id = "accuracy-chart">
         <script>$("#model-results #accuracy-chart-container #accuracy-chart")
-                  .load(accuracy_plots[update_num]);</script>
+                  .load(accuracy_plots[index]);</script>
         </div>
         
       </div>
       
     </div>
 
+  <div id = "bottom-menu-bar">
+    <center>
+      <a href="index.html"><button>Background</button></a>
+      <a href="decision-tree.html"><button>Decision<br>Tree</button></a>
+      <a href="k-nearest-neighbors.html"><button>K Nearest<br>Neighbors</button></a>
+      <a href="k-means.html"><button>K Means</button></a>
+    </center>
+  </div>
+  
   <footer>
     <p class="white">Copyright 2017 by Sarah Kelley, Brad Putman, and David Skarbrevik.
     <br>School of Information, University of California, Berkeley. All rights reserved.</p>

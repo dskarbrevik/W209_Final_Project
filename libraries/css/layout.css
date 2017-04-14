@@ -1,3 +1,19 @@
+header
+{
+  margin: auto;
+  height: 200px;
+  width: 1100px;
+}
+
+footer
+{
+  border-top-width: 3px;
+  border-top-style: solid;
+  border-top-color: white;
+  margin-top: 50px;
+  text-align: center;
+}
+
 body
 {
   background-color: #334d66;
@@ -5,15 +21,14 @@ body
   color: white;
 }
 
-header
+img
 {
-  height: 200px;
-}
-
-#menu-bar
-{
-  padding-top: 0;
-	height: 100px;
+  width: 500px;
+  display: block;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 button
@@ -41,12 +56,115 @@ button:hover {
     cursor: pointer;
 }
 
-footer
+body #top-menu-bar
 {
-  border-top-width: 3px;
-  border-top-style: solid;
-  border-top-color: white;
-  margin-top: 50px;
-  text-align: center;
+  padding-top: 0;
+	height: 100px;
 }
 
+body #bottom-menu-bar
+{
+  margin-top: 50px;
+	height: 50px;
+}
+
+body #page-title
+{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  width: 1100px;
+}
+
+body .teaching-div
+{
+  height: 550px;
+  width: 1050px;
+  margin-top: 20px;
+}
+
+body .teaching-div .text
+{
+  margin-right: 10px;
+  width: 500px;
+  float: left;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+body .teaching-div .viz
+{
+  height: 500px;
+  width: 400px;
+  float: right;
+  border-style: none;
+  margin-right: 20px;
+  color: black;
+}
+
+body .interactive-controls 
+{
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1010px;
+}
+
+body .interactive-controls .vcr-controls
+{
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 450px;
+  border-width: 2px;
+  border-style: solid;
+}
+
+body .interactive-controls .vcr-controls button
+{
+  border-radius: 50%;
+  font-size: 24px;
+  vertical-align: top;
+  height: 60px;
+  width: 60px;
+}
+
+body #model-results
+{
+  height: 550px;
+  width: 1100px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body #model-results #decision-surface-container
+{
+  height: 550px;
+  width: 510px;
+  float: left;
+}
+
+body #model-results #decision-surface
+{
+  height: 500px;
+  margin-top: 5px;
+  color: black;
+}
+
+body #model-results #accuracy-chart-container
+{
+  height: 550px;
+  width: 510px;
+  float: right;
+}
+
+body #model-results #accuracy-chart
+{
+  height: 500px;
+  margin-top: 5px;
+  color: black;
+}
