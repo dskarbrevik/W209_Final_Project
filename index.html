@@ -38,9 +38,9 @@
   </div>
 
   <div id = "intro" style="margin-left:250px;margin-right:250px">
-    <h5>If you're not an expert in machine learning, it's normal to feel overwhelmed by the sheer number of algorithms that can be implemented to solve any given problem. The reason so many algorithms exist is simple: each one has certain pros and cons that allow it to work well for some tasks and poorly for others.</h5>
+    <h5>If you're not an expert in machine learning, it's normal to feel overwhelmed by the sheer number of different machine learning approachs that can be taken to any given problem. These different techniques - often called algorithms - each have different pros and cons that allow them to work well for some tasks and but mean they may perform poorly on others.</h5>
     <br>
-    <h5>We're going to look at four particularly common algorithms in a way that visually expresses their core properties. To do this, we'll be using a dataset known as the Iris dataset. It is a simple table of observations for 3 particular types of flowers.</h5>
+    <h5>We're going to look in detail at three particularly common algorithms  and use visualization to understand thier core properties. To do this, we'll be using a dataset known as the Iris dataset. It is a simple table of observations of for 3 different species of irises. </h5>
     <br>
     <div id = "flowers">
       <center>
@@ -50,7 +50,7 @@
       </center>
     </div>
     <br>
-    <h5>Do you think these flowers look similar or different? If I show you a new picture could you tell me which of these three flowers my new picture belongs to? In machine learning this challenge is known as <b>classification</b>. The Iris dataset challenges you further. Instead of looking at pictures of flowers, you're only given the lengths and widths of the sepals and petals of these flowers. Here are three rows directly from the Iris dataset:</h5>
+    <h5>If you saw a new picture of an iris, could you say which of these three species it belongs to? That might be hard to do! In machine learning this challenge is known as <b>classification</b>, that is, trying to decide which group a new example belongs to based on it's features. In this case,  for each flower in the database, we have measurements of the petal and sepal (green part that supports the petal) and also which species the flower belongs to. Here are three rows directly from the Iris dataset:</h5>
 
     <table>
       <tr>
@@ -87,7 +87,7 @@
       </tr>
     </table> 
 
-    <h5>Now can you tell what flower this is?</h5>
+    <h5>Now can you guess what flower this is?</h5>
 
     <table>
       <tr>
@@ -113,9 +113,9 @@
     <h5>So back to the plethora of algorithms that might help us with our flower classification task, we can make things easier by dividing all of them up into two categories:</h5>
     <ul>
       <li><b>Supervised learning algorithms</b> - (e.g. k-nearest neighbors, decision trees)</li>
-      <h5>These algorithms make use of prior data to label new data. So we give them some flower records with known labels and based on that, they decide the proper label for new unlabeled flower records.</h5> 
+      <h5>These algorithms make use of prior data to label new data. So we give them some flower records with known labels (in this case the species) and based on that, the algorithm predicts the proper label for new unlabeled flower records. </h5> 
       <li><b>Unsupervised learning algorithms</b> - (e.g. k-means)</li>
-      <h5>The big difference for these algorithms is that they don't rely on known examples to label new ones. Imagine I gave you all 150 rows of the Iris dataset without the "flower type" label and asked, "how many flower types are there?". You'd obviously say three because you're familiar with the dataset, but if it were some new kind of dataset, there could be anywhere from 1-150 types of flowers, right? Unsupervised machine learning helps </h5>
+      <h5>The big difference for these algorithms is that they don't rely on known examples to label new ones. Instead, they look for patterns in the observations and try to cluster the observations into groups based on these patterns. We don't need to know in advance what those groups are. </h5>
     </ul>
     <br>
     <h5>Now you're ready to dig a little deeper! Click one of the algorithms below to explore a specific algorithm in-depth.</h5>

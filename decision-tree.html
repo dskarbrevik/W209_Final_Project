@@ -47,11 +47,10 @@
         
 <div class = "text">
           
-<h5>A decision tree is a <a href="https://en.wikipedia.org/wiki/Greedy_algorithm">greedy algorithm</a> that follows a step-wise approach for classifying data points.</h5>
+<h5>A decision tree works by sucessively splitting the data into smaller groups based on the attributes, trying to produce groups that all have the same label. So in this case, it is trying to define groups that are all the same species. 
+To get there, the decision tree first splits the data into two parts and classifies every data point in a given section as the category that is most common in that section.</h5>
           
-<h5>In the first step, the decision tree splits the unclassified data set into two sections, and classifies every data point in a given section as the category that makes up a <a href="https://en.wikipedia.org/wiki/Plurality_(voting)">plurality</a> of the points in the section.</h5>
-          
-<h5>The sections themselves are chosen in order to correctly classify as many points as possible.</h5>
+<h5>How does it decide where to divide the data? Simple. It choses the sections in order to correctly classify as many points as possible.</h5>
           
 </div>
 
@@ -72,7 +71,7 @@
           
           <h5>In the second step, the process is repeated. For each resulting section from the first step, another optimal split is made.</h5>
           
-          <h5>Once again, every data point in a given section is classified as the category that makes up a pluraliity of the points in the section. Note the <a href="https://en.wikipedia.org/wiki/Geometric_progression">geometric progression</a> in this process. Each classification step creates more new classification sections than the previous step did.</h5>
+          <h5>Once again, every data point in a given section is classified as the category that makes up a pluraliity of the points in the section. Since each previously split section can be split again, each step in the decision tree algorithm creates more new classification sections than the previous step did.</h5>
           
         </div>
         <div class = "viz">
@@ -86,7 +85,7 @@
         <div class = "text">
           <h5>This process continues in an iterative fashion until one of the following things happens:</h5> 
           <h5>A) The pre-defined maximum number of iterations (what we call the maximum tree depth) has been reached.</h5>
-          <h5>B) The tree's decision surace (the collection of all sections of identically classified points) has <a href="https://en.wikipedia.org/wiki/Limit_(mathematics)">converged</a>.</h5>
+          <h5>B) The tree's decision surace (the collection of all sections of identically classified points) has converged. This means that the groups are as narrowly divided as they can be and no further splits exist which would allow the algorithm to better classify the points.</h5>
         </div>
         
         <div class = "viz">

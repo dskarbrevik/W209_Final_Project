@@ -48,11 +48,11 @@
         
 <div class = "text">
           
-<h5>The KMeans algorithm is an unsupervised clustering algorithm that seeks to partition observations into a preset number of clusters. </h5>
+<h5>The KMeans algorithm is an unsupervised clustering algorithm that seeks to partition observations into a preset number of clusters. To break that down, that means that we don't need to tell the model what groups our data falls into, but instead it tries to determine the groups itself! This is useful because we may not always have labeled data.</h5>
           
-<h5>Several different initialization methods are possible, but we use the Forgy method in which k random points from the data are selected as initial cluster centers.</h5>
+<h5> Looking at the graph to the left, what groups would you divide the data into? It is a little hard to tell, right? But you might be able to see one slightly distinct cluster to the upper left. Hover over the point on the graph to see the actual label to which each belongs. Did that line up with how you imagined the points would be divided?</h5>
           
-<h5>One key weakness of the method is that the number of clusters must be fixed by the user initially. Inituitively, we can see that this data has 3 main clusters.</h5>
+<h5></h5>
           
 </div>
 
@@ -66,12 +66,13 @@
       <div class = "teaching-div 2">
         <div class = "text">
           
-          <h5>Each point is assigned to the cluster center which it is closest to (has the minimum Eucidian distance from) and then a new cluster centroid is found by finding the mean of all the points in a given cluster. </h5>
+          <h5>To get started with the kmeans algorithm, we first need to decide how many groups to use. In practice this can be tricky, but for now we will cheat and decide on three groups, because we know there are three types of iris. Once we have chosen the number of groups (which we call 'k'), we will chose k random points as the centers of our clusters. </h5>
           
-          <h5>Each point is then reassigned to the center that is now closest to it.</h5>
+          <h5>Then, we assign each point to belong to the group who's center is closest to it. </h5>
 
-          <h5>The model has reached convergence once the centers of the clusters are no longer changing.</h5>
-          <h5>In this case, our model has correctly identified the 3 species into 3 separate clusters.</h5>
+          <h5>How does this look? </h5>
+
+          <h5>Well those aren't great grouping, but this is just the first iteration. Next, we will recalculate the centers! </h5>
           
         </div>
         <div class = "viz">
