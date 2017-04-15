@@ -66,13 +66,13 @@
       <div class = "teaching-div 2">
         <div class = "text">
           
-          <h5>To get started with the kmeans algorithm, we first need to decide how many groups to use. In practice this can be tricky, but for now we will cheat and decide on three groups, because we know there are three types of iris. Once we have chosen the number of groups (which we call 'k'), we will chose k random points as the centers of our clusters. </h5>
+          <h5>To get started with the kmeans algorithm, we first need to decide how many groups to use. In practice this can be tricky, but for now we will cheat and decide on three groups, because we know there are three types of iris. Once we have chosen the number of groups (which we call 'k'), we will chose k random points as the centers of our clusters. These are marked in black on the graph to the right. </h5>
           
           <h5>Then, we assign each point to belong to the group who's center is closest to it. </h5>
 
           <h5>How does this look? </h5>
 
-          <h5>Well those aren't great grouping, but this is just the first iteration. Next, we will recalculate the centers! </h5>
+          <h5>As you can see, those aren't great groupings because most of the groups have a mix of species in them. But this is just the first iteration. Next, we will recalculate the centers! </h5>
           
         </div>
         <div class = "viz">
@@ -84,8 +84,9 @@
       <!-- Teaching section 3 -->
       <div class = "teaching-div 3">
         <div class = "text">
-          <h5>However, KMeans is vulnerable to its random initialization.</h5> 
-          <h5>Here, runnign the same model with a different random seed gives us a different combination of clusters, on that less accurately reflects the three different species.</h5>
+          <h5> In the next step, a new center is calculated by taking the mean of all the points in a given cluster. Then, points are reassigned to the new center that they are now closest too. At the bottom of the page, you can watch this process occur step by step. </h5> 
+          <h5>This process is repeated over and over until the cluster are no longer changing with each sucessive iteration. This means that the model has reached convergence. </h5>
+          <h5>On the right is the final result, once the model has reached convergence. In this case, comparing this graph to the graph above, you can see that the clusters much better match the actual clusters in the data! </h5>
         </div>
         
         <div class = "viz">
