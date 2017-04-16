@@ -49,7 +49,7 @@
         <div class = "text">
                   
         <h5>K-Nearest Neighbor (or k-NN) is somewhat self-explanatory. This algorithm simply labels data with the label of whatever known data points are closest to it.</h5>
-        <h5>For example, in the plot to the right, if we had a flower that had sepal width = 3cm and sepal height = 7cm, it would fall into the versicolor flower region. This is simply because the <i>nearest</i> data point is also versicolor.</h5>                   
+        <h5>For example, in the plot to the right, if we had a flower that had sepal width = 3cm and sepal height = 7cm we would guess that it was a versicolor iris because the <i>nearest</i> data point is versicolor.</h5>                   
         </div>
 
         <div class = "viz">
@@ -62,9 +62,8 @@
       <div class = "teaching-div 2">
         <div class = "text">
           
-          <h5>The "k" in k-NN refers to how many neighbors should be considered. In the previous example we had a 1-NN model, meaning we only looked for the single closest neighbor when deciding what to call a new unknown flower.</h5>
-          <h5>In the plot here, we have the exact same data as before, but because this is now a 2-NN model we're looking for the two nearest neighbors and taking a vote to decide what label to choose. For example, if the two nearest neighbors are both setosa, then our new data point will be labeled setosa as well.</h5> 
-          <h5>However, an issue arises if the two neighbors are different (i.e. a tie situation). Notice that two of the virginica data points would be incorrectly labeled by our 2-NN model. What would we label those two points if we instead chose a 3-NN model?</h5>
+          <h5>Generalizing this rule, we can draw decision boundaries. Any point that falls in the blue-colored area will classified as a setosa iris because the example closest to it will be a setosa, and the same holds true for the other two regions.</h5> 
+          <h5>But is this the best way to classify points? Picking only the single nearest neighbour means that our predictions will reproduce very closely the patterns found in our training data but may not generalize as well to new data. To combat this, we can consider not just the single closest point, but any number of neighbours. </h5>
 
 
         </div>
@@ -78,9 +77,9 @@
       <div class = "teaching-div 3">
         <div class = "text">
 
-
-          <h5>Still with a 2-NN model, we've doubled the amount of known data. Notice the decision boundary has become more jagged. If we switched to a 1-NN model would the boundaries be more or less jagged than this?</h5>
-          <h5>Also, notice there are more known data points that would be incorrectly labeled by our decision boundary. Does it make sense why our 2-NN model would choose to make the decision boundary the way it did around those points?</h5>
+          <h5>The "k" in k-NN refers to how many neighbors should be considered. In the previous example we had a 1-NN model, meaning we only looked for the single closest neighbor when deciding what to call a new unknown flower. </h5>
+          <h5>In the plot here, we have the exact same data as before, but because this is now a 2-NN model we're looking for the two nearest neighbors and taking a vote to decide what label to choose. For example, if the two nearest neighbors are both setosa, then our new data point will be labeled setosa as well.</h5> 
+          <h5>In practice, as we increase the number of neighbours, the boundaries become smoother and less jagged. Try it yourself at the bottom of the page! </h5>
 
 
         </div>
