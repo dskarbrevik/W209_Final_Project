@@ -94,7 +94,7 @@
     </div>
 
     <!-- Interactive controls -->
-    <div class = "interactive-controls">
+    <div class = "interactive-controls-knn">
       <center><H3>Try it yourself!</H3></center>
       <center><h5>Now, looking at the full Iris dataset, use the controls below to see how the accuracy of the K-Nearest Kneighbors algorithm changes with different K values.</h5></center>
 
@@ -126,14 +126,6 @@
           
         var update_num = 0;
         
-        function play()
-        {
-          while (update_num < boundary_plots.length){
-            setTimeout(advanceone(), 2000);
-            //setTimeout(advanceone, 2000);
-          }
-        }
-        
         function advanceone(){
           if (update_num < boundary_plots.length)
           {
@@ -160,38 +152,13 @@
                 .load(accuracy_plots[update_num]);
           }
         }
-        
-        function toend()
-        {
-          update_num = (boundary_plots.length - 1)
-          
-          $("#model-results #decision-surface-container #decision-surface")
-              .load(boundary_plots[boundary_plots.length -1]);
-              
-          $("#model-results #accuracy-chart-container #accuracy-chart")
-              .load(accuracy_plots[accuracy_plots.length -1]);
-        }
-        
-        function tostart()
-        {
-          update_num = 0
-          
-          $("#model-results #decision-surface-container #decision-surface")
-              .load(boundary_plots[0]);
-              
-          $("#model-results #accuracy-chart-container #accuracy-chart")
-              .load(accuracy_plots[0]);
-        }
-        
       </script>
 
       
-      <div class = "vcr-controls">
+      <div class = "vcr-controls-knn">
         <center>
-          <button onclick = 'tostart()'>|&#x25c0;</button>
-          <button onclick = 'decreaseone()'>&#x25c0;</button>
-          <button onclick = 'advanceone()'>&#9654;</button>
-          <button onclick = 'toend()'>&#9654;|</button>
+          <button onclick = 'decreaseone()'>decrease k value</button>
+          <button onclick = 'advanceone()'>increase k value</button>
         </center>
       </div>
     </div>
