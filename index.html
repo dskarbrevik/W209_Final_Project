@@ -36,24 +36,25 @@
   <div id = "page-title">
      <center> <h2>Some Useful Information</h2> </center>
   </div>
+    
+    <div class = "text">
+      <h5>If you're not an expert in machine learning, it's normal to feel overwhelmed by the sheer number of different machine learning approachs that can be taken to any given problem. These different techniques - called algorithms - each have different pros and cons that allow them to work well for some tasks and but mean they may perform poorly on others.</h5>
 
-  <div id = "intro" style="margin-left:250px;margin-right:250px">
-    <h5>If you're not an expert in machine learning, it's normal to feel overwhelmed by the sheer number of different machine learning approachs that can be taken to any given problem. These different techniques - called algorithms - each have different pros and cons that allow them to work well for some tasks and but mean they may perform poorly on others.</h5>
-    <br>
-    <h5>We're going to look in detail at three particularly common algorithms  and use visualization to understand thier core properties. To do this, we'll be using a dataset known as the Iris dataset. It is a simple table of observations of for 3 different species of irises. </h5>
-    <br>
-    <div id = "flowers">
-      <center>
-        <img src="iris_virginica.jpg" alt="Iris virginica">
-        <img src="iris_versicolor.jpg" alt="Iris versicolor">
-        <img src="iris_setosa.jpg" alt="Iris setosa">
-      </center>
+      <h5>We're going to look in detail at three particularly common algorithms  and use visualization to understand thier core properties. To do this, we'll be using a dataset known as the Iris dataset. It is a simple table of observations of for 3 different species of irises. </h5>
     </div>
-    <br>
-    <h5>If you saw a new picture of an iris, could you say which of these three species it belongs to? </h5>
-
-     <h5>That might be hard to do! But fortunately, we have computers to help us! In machine learning this challenge is known as <b>classification</b>, that is, trying to decide which group a new example belongs to based on its features. In this case, we would be looking at measurements of the petal and sepal (green part that supports the petal) for a new example iris and  trying to guess which species of iris it is. Here are three rows directly from the Iris dataset:</h5>
-
+  
+    <div class = "flower-box">
+          <img src="index/iris_virginica.jpg" alt="Iris virginica"> 
+          <img src="index/iris_versicolor.jpg" alt="Iris versicolor">
+          <img src="index/iris_setosa.jpg" alt="Iris setosa"> 
+    </div>
+    
+    <div class = "text">
+      <h5>If you saw a new picture of an iris, could you say which of these three species it belongs to? </h5>
+  
+       <h5>That might be hard to do! But fortunately, we have computers to help us! In machine learning this challenge is known as <b>classification</b>, that is, trying to decide which group a new example belongs to based on its features. In this case, we would be looking at measurements of the petal and sepal (green part that supports the petal) for a new example iris and  trying to guess which species of iris it is. Here are three rows directly from the Iris dataset:</h5>
+      </div>
+    
     <table>
       <tr>
         <th>Record ID</th>
@@ -89,7 +90,7 @@
       </tr>
     </table> 
 
-    <h5>Now can you guess what flower this is?</h5>
+    <div class = "text"> <h5>Now can you guess what flower this is?</h5> </div>
 
     <table>
       <tr>
@@ -110,18 +111,28 @@
       </tr>
     </table>
 
-    <h5>It's Iris setosa! Whether you got it right or not, imagine you had a thousand or even a million of these records that you needed to label this same way. The whole Iris dataset is only 150 rows, but even at that number you'd be cringing. Luckily, as you may have guessed, this task is perfect for machine learning algorithms!</h5>
-    <br>
-    <h5>So back to the plethora of algorithms that might help us with our flower classification task, we can make things easier by dividing all of them up into two categories:</h5>
-    <ul>
-      <li><b>Supervised learning algorithms</b> - (e.g. k-nearest neighbors, decision trees)</li>
-      <h5>These algorithms make use of prior data to label new data. So we give them some flower records with known labels (in this case the species) and based on that, the algorithm predicts the proper label for new unlabeled flower records. </h5> 
-      <li><b>Unsupervised learning algorithms</b> - (e.g. k-means)</li>
-      <h5>The big difference for these algorithms is that they don't rely on known examples to label new ones. Instead, they look for patterns in the observations and try to cluster the observations into groups based on these patterns. We don't need to know in advance what those groups are. </h5>
-    </ul>
-    <br>
-    <h5>Now you're ready to dig a little deeper! Click one of the algorithms below to explore a specific algorithm in-depth.</h5>
-  </div>
+    <div class = "text">
+      <h5>It's Iris setosa! Whether you got it right or not, imagine you had a thousand or even a million of these records that you needed to label this same way. The whole Iris dataset is only 150 rows, but even at that number you'd be cringing. Luckily, as you may have guessed, this task is perfect for machine learning algorithms!</h5>
+    </div>
+    
+    <div class = "text">
+      <h5>So back to the plethora of algorithms that might help us with our flower classification task, we can make things easier by dividing all of them up into two categories:</h5>
+      
+      <ul>
+        <li><b>Supervised learning algorithms</b> - (e.g. k-nearest neighbors, decision trees)</li>
+        
+        <h5>These algorithms make use of prior data to label new data. So we give them some flower records with known labels (in this case the species) and based on that, the algorithm predicts the proper label for new unlabeled flower records. </h5> 
+        
+        <li><b>Unsupervised learning algorithms</b> - (e.g. k-means)</li>
+        
+        <h5>The big difference for these algorithms is that they don't rely on known examples to label new ones. Instead, they look for patterns in the observations and try to cluster the observations into groups based on these patterns. We don't need to know in advance what those groups are. </h5>
+      </ul>
+      
+    </div>
+      
+    <div class = "text">
+      <h5>Now you're ready to dig a little deeper! Click one of the algorithms below to explore a specific algorithm in-depth.</h5>
+    </div>
 
  <div id = "bottom-menu-bar">
     <center>
