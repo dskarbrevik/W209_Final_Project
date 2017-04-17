@@ -1,8 +1,8 @@
 # Import bokeh packages
 from bokeh.layouts import column
-from bokeh.models import CategoricalColorMapper, ColumnDataSource, CustomJS, Legend, Range, Range1d, Slider
+from bokeh.models import CategoricalColorMapper, ColumnDataSource, CustomJS, Legend, Range, Range1d, Slider, HoverTool
 from bokeh.palettes import Category20
-from bokeh.plotting import figure, output_file, save, show
+from bokeh.plotting import figure, output_file, save, show, reset_output
 
 # Import python packages
 from IPython.display import Image
@@ -11,6 +11,11 @@ import numpy as np
 #import pydotplus 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.datasets import load_iris
+
+import os
+
+os.chdir("C:\\Users\\skarb\\Desktop\\Github\\W209_Final_Project\\k-nearest-neighbors\\")
+
 
 # Load iris data
 iris = load_iris()
@@ -37,13 +42,13 @@ light_palette = [Category20[6][2*i + 1] for i in range(3)]
 dark_palette = [Category20[6][2*i] for i in range(3)]
 
 # Determine the limits of the decision boundary plots
-boundary_x_min = min([dataPoint[0] for dataPoint in trainingData]) - 1
-boundary_x_max = max([dataPoint[0] for dataPoint in trainingData]) + 1
-boundary_x_range = Range1d(boundary_x_min, boundary_x_max, bounds = (boundary_x_min, boundary_x_max))
+x_min = min([dataPoint[0] for dataPoint in trainingData]) - 1
+x_max = max([dataPoint[0] for dataPoint in trainingData]) + 1
+x_range = Range1d(x_min, x_max, bounds = (x_min, x_max))
 
-boundary_y_min = min([dataPoint[1] for dataPoint in trainingData]) - 1
-boundary_y_max = max([dataPoint[1] for dataPoint in trainingData]) + 1
-boundary_y_range = Range1d(boundary_y_min, boundary_y_max, bounds = (boundary_y_min, boundary_y_max))
+y_min = min([dataPoint[1] for dataPoint in trainingData]) - 1
+y_max = max([dataPoint[1] for dataPoint in trainingData]) + 1
+y_range = Range1d(y_min, y_max, bounds = (y_min, y_max))
 
 
 file_names = ["knn1.html","knn2.html","knn3.html","knn4.html","knn5.html",
@@ -58,54 +63,79 @@ for j in nums:
     
     
     # Create a mesh grid based on the plot limits, then classify the mesh using the trained model
-    xx, yy = np.meshgrid(np.arange(boundary_x_min, boundary_x_max, 0.01), 
-                         np.arange(boundary_y_min, boundary_y_max, 0.01))
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01), 
+                         np.arange(y_min, y_max, 0.01))
     z = model.predict(np.c_[xx.ravel(), yy.ravel()])
     zz = z.reshape(xx.shape)
     
     # Create bokeh figure
     bokeh_plot = figure(plot_width=500,
                         plot_height=500,
-                        x_range = boundary_x_range,
-                        y_range = boundary_y_range
+                        x_range = x_range,
+                        y_range = y_range,
+                        tools = "pan, box_zoom, wheel_zoom, reset, undo, redo"
                         )
     
+    # Add a custom hover tool to the plot
+    custom_hover = HoverTool(tooltips = [("Index", "$index"),
+                                         ("(x, y)", "($x{0.00}, $y{0.00})"),
+                                         ("Class", "@true_classes")
+                                        ])
+    bokeh_plot.add_tools(custom_hover)
+
     # Plot the mesh grid on the bokeh figure as an image
     # Note: "Z" here is the mesh grid predictions, and it must be contained in a list (i.e. "[Z]" not "Z")
     bokeh_plot.image(image=[zz],
                      alpha = 0,
-                     x = boundary_x_min,           
-                     y = boundary_y_min,
-                     dw =(boundary_x_max - boundary_x_min),
-                     dh =(boundary_y_max - boundary_y_min),
+                     x = x_min,           
+                     y = y_min,
+                     dw =(x_max - x_min),
+                     dh =(y_max - y_min),
                      palette = light_palette
                     )
-    
+
     # Plot data points in the label_0 bucket
-    bokeh_plot.circle([trainingData[i][0] for i in label_0], 
-                      [trainingData[i][1] for i in label_0],
+    source_0 = ColumnDataSource(data = dict(x = [trainingData[i][0] for i in label_0],
+                                            y = [trainingData[i][1] for i in label_0],
+                                            true_classes = [labelNames[trainingLabels[i]] for i in label_0]))
+    
+    bokeh_plot.circle(x = source_0.data['x'],
+                      y = source_0.data['y'], 
+                      source = source_0,
                       size = 4,
                       fill_color = dark_palette[0],
                       line_color = dark_palette[0],
                       legend = labelNames[0]
                      )
     
+    
     # Plot data points in the label_1 bucket
-    bokeh_plot.circle([trainingData[i][0] for i in label_1], 
-                      [trainingData[i][1] for i in label_1],
+    source_1 = ColumnDataSource(data = dict(x = [trainingData[i][0] for i in label_1],
+                                            y = [trainingData[i][1] for i in label_1],
+                                            true_classes = [labelNames[trainingLabels[i]] for i in label_1]))
+    
+    bokeh_plot.circle(x = source_1.data['x'],
+                      y = source_1.data['y'], 
+                      source = source_1,
                       size = 4,
                       fill_color = dark_palette[1],
                       line_color = dark_palette[1],
-                      legend = labelNames[1]
+                      legend = labelNames[1],
                      )
     
+    
     # Plot data points in the label_2 bucket
-    bokeh_plot.circle([trainingData[i][0] for i in label_2], 
-                      [trainingData[i][1] for i in label_2],
+    source_2 = ColumnDataSource(data = dict(x = [trainingData[i][0] for i in label_2],
+                                            y = [trainingData[i][1] for i in label_2],
+                                            true_classes = [labelNames[trainingLabels[i]] for i in label_2]))
+    
+    bokeh_plot.circle(x = source_2.data['x'],
+                      y = source_2.data['y'], 
+                      source = source_2,
                       size = 4,
                       fill_color = dark_palette[2],
                       line_color = dark_palette[2],
-                      legend = labelNames[2]
+                      legend = labelNames[2],
                      )
     
     # Label axes, place legend
@@ -115,6 +145,6 @@ for j in nums:
     title = "When K = {}".format(j)
     bokeh_plot.title.text = title
 
-    output_file("test{}.html".format(j))
+    output_file("knn{}.html".format(j))
     save(bokeh_plot)
 
