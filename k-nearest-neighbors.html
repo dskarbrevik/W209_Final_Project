@@ -15,7 +15,6 @@
   <script type="text/javascript" src="libraries/js/bokeh-widgets-0.12.4.min.js"></script>
   <script type="text/javascript" src="libraries/js/d3.js"></script>
   <script type="text/javascript" src="libraries/js/jquery-3.1.1.min.js"></script>
-  <script defer type="text/javascript" src="decision-tree/decision-tree.js"></script>
 </head>
 
 <body>  
@@ -53,7 +52,7 @@
         </div>
 
         <div class = "viz">
-          <script>$(".teaching-div:nth-child(1) .viz").load("k-nearest-neighbors/knn_lesson1.html");</script> 
+           <script>$(".teaching-div:nth-child(1) .viz").load("k-nearest-neighbors/knn_lesson1.html");</script>
         </div>
         
       </div>
@@ -67,7 +66,7 @@
 
 
         </div>
-        <div class = "viz">
+          <div class = "viz">
           <script>$(".teaching-div:nth-child(2) .viz").load("k-nearest-neighbors/knn_lesson2.html");</script>
           </div>
       </div>
@@ -79,12 +78,12 @@
 
           <h5>The "k" in k-NN refers to how many neighbors should be considered. In the previous example we had a 1-NN model, meaning we only looked for the single closest neighbor when deciding what to call a new unknown flower. </h5>
           <h5>In the plot here, we have the exact same data as before, but because this is now a 2-NN model we're looking for the two nearest neighbors and taking a vote to decide what label to choose. For example, if the two nearest neighbors are both setosa, then our new data point will be labeled setosa as well.</h5> 
-          <h5>In practice, as we increase the number of neighbours, the boundaries become smoother and less jagged. Try it yourself at the bottom of the page! </h5>
+          <h5>In practice, as we increase the number of neighbors, the boundaries become smoother and less jagged. Try it yourself at the bottom of the page! </h5>
 
 
         </div>
         
-        <div class = "viz">
+          <div class = "viz">
           <script>$(".teaching-div:nth-child(3) .viz").load("k-nearest-neighbors/knn_lesson3.html");</script></div>
         </div>
       
@@ -95,7 +94,7 @@
     <!-- Interactive controls -->
     <div class = "interactive-controls-knn">
       <center><H3>Try it yourself!</H3></center>
-      <center><h5>Now, looking at the full Iris dataset, use the controls below to see how the accuracy of the K-Nearest Kneighbors algorithm changes with different K values.</h5></center>
+      <center><h5>Now, looking at the full Iris dataset, use the controls below to see how the accuracy of the K-Nearest Kneighbors algorithm changes with different values of K.</h5></center>
 
       <script type="text/javascript">
         var boundary_plots = new Array( 
@@ -123,19 +122,34 @@
           "k-nearest-neighbors/accuracy-10.html"
           );
           
+        var display_k = new Array(
+          "K = 1",
+          "K = 2",
+          "K = 3",
+          "K = 4",
+          "K = 5",
+          "K = 6",
+          "K = 7",
+          "K = 8",
+          "K = 9",
+          "K = 10"
+        );
         var update_num = 0;
         
         function advanceone(){
-          if (update_num < boundary_plots.length)
+          if (update_num < boundary_plots.length - 1)
           {
             update_num +=1;
           
+            $("#vcr-controls-knn :nth-child(3)").text(display_k[update_num])
+            
             $("#model-results #decision-surface-container #decision-surface")
                 .load(boundary_plots[update_num]);
                 
             $("#model-results #accuracy-chart-container #accuracy-chart")
                 .load(accuracy_plots[update_num]);
           }
+          
         }
         
         function decreaseone()
@@ -144,22 +158,25 @@
           {
             update_num -=1;
           
+            $("#vcr-controls-knn :nth-child(3)").text(display_k[update_num])
+          
             $("#model-results #decision-surface-container #decision-surface")
                 .load(boundary_plots[update_num]);
         
             $("#model-results #accuracy-chart-container #accuracy-chart")
                 .load(accuracy_plots[update_num]);
           }
+          
         }
+        
       </script>
-
       
-      <div class = "vcr-controls-knn">
-        <center>
-          <button onclick = 'decreaseone()'>decrease k value</button>
-          <button onclick = 'advanceone()'>increase k value</button>
-        </center>
-      </div>
+        <div id = "vcr-controls-knn">
+            <div class = "control"><button onclick = 'decreaseone()'>-</button></div>
+            <div class = "control"><button onclick = 'advanceone()'>+</button></div>
+            <div class = "control">K = 1 </div>
+        </div>
+        
     </div>
     
     <div id = "model-results">

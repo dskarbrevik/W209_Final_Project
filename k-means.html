@@ -15,7 +15,6 @@
   <script type="text/javascript" src="libraries/js/bokeh-widgets-0.12.4.min.js"></script>
   <script type="text/javascript" src="libraries/js/d3.js"></script>
 	<script type="text/javascript" src="libraries/js/jquery-3.1.1.min.js"></script>
-	<script defer type="text/javascript" src="decision-tree/decision-tree.js"></script>
 </head>
 
 <body>  
@@ -130,17 +129,9 @@
           
         var update_num = 0;
         
-        function play()
-        {
-          while (update_num < boundary_plots.length){
-            setTimeout(advanceone(), 2000);
-            //setTimeout(advanceone, 2000);
-          }
-        }
-        
         function advanceone()
         {
-          if (update_num < boundary_plots.length)
+          if (update_num < boundary_plots.length - 1)
           {
             update_num +=1;
       
