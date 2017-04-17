@@ -46,12 +46,12 @@ for i,j in zip(list(range(15)),select_data):
     small_data[i][1] = iris.data[j][1]
     small_labels[i] = iris.target[j]
 
-smallest_data = np.zeros([2,2])
-smallest_labels = np.zeros([2,])
-smallest_data[0] = iris.data[5,:2]
-smallest_data[1] = iris.data[68,:2]
-smallest_labels[0] = iris.target[5]
-smallest_labels[1] = iris.target[68]
+#small_data = np.zeros([2,2])
+#small_labels = np.zeros([2,])
+#small_data[0] = iris.data[5,:2]
+#small_data[1] = iris.data[68,:2]
+#small_labels[0] = iris.target[5]
+#small_labels[1] = iris.target[68]
 
 # Bucket the training data points by training label (i.e. setosa, versicolor or virginica)
 # This will make it easier to generate a legend for the plot
@@ -79,7 +79,7 @@ y_min = min([dataPoint[1] for dataPoint in small_data]) - 1
 y_max = max([dataPoint[1] for dataPoint in small_data]) + 1
 y_range = Range1d(y_min, y_max, bounds = (y_min, y_max))
 
-k_val=2
+k_val=1
 model = KNeighborsClassifier(n_neighbors=k_val) # create the classifier
 X = [ [ dataPoint[0], dataPoint[1] ] for dataPoint in small_data]
 y = small_labels
@@ -126,7 +126,7 @@ source_0 = ColumnDataSource(data = dict(x = [small_data[i][0] for i in label_0],
 bokeh_plot.circle(x = source_0.data['x'],
                   y = source_0.data['y'], 
                   source = source_0,
-                  size = 6,
+                  size = 8,
                   fill_color = dark_palette[0],
                   line_color = dark_palette[0],
                   legend = labelNames[0]
@@ -141,7 +141,7 @@ source_1 = ColumnDataSource(data = dict(x = [small_data[i][0] for i in label_1],
 bokeh_plot.circle(x = source_1.data['x'],
                   y = source_1.data['y'], 
                   source = source_1,
-                  size = 6,
+                  size = 8,
                   fill_color = dark_palette[1],
                   line_color = dark_palette[1],
                   legend = labelNames[1],
@@ -162,27 +162,35 @@ bokeh_plot.circle(x = source_2.data['x'],
                   legend = labelNames[2],
                  )
 
-# add lines connecting from unknown point to known points
-#bokeh_plot.line(x=[smallest_data[0][0],5.8],
-#                y=[smallest_data[0][1],3.8], 
+#bokeh_plot.circle(x = 5.8,
+#                  y = 3.8, 
+#                  size = 8,
+#                  fill_color = "grey",
+#                  line_color = "grey",
+#                  legend = "????",
+#                 )
+#
+## add lines connecting from unknown point to known points
+#bokeh_plot.line(x=[small_data[0][0],5.8],
+#                y=[small_data[0][1],3.8], 
 #                line_dash="dashed",
 #                line_color="grey",
 #                line_width = 2)
 #
-#bokeh_plot.line(x=[smallest_data[1][0],5.8],
-#                y=[smallest_data[1][1],3.8], 
+#bokeh_plot.line(x=[small_data[1][0],5.8],
+#                y=[small_data[1][1],3.8], 
 #                line_dash="dashed",
 #                line_color="grey",
 #                line_width = 2)
-
+#
 #bokeh_plot.add_layout(Arrow(end=OpenHead(size=12, line_color="grey"), 
 #                            line_color="grey",
 #                            line_width = 2,
 #                            line_dash="dashed",
 #                            x_start=5.8, 
 #                            y_start=3.8, 
-#                            x_end=smallest_data[0][0], 
-#                            y_end=smallest_data[0][1]))
+#                            x_end=small_data[0][0], 
+#                            y_end=small_data[0][1]))
 #
 #bokeh_plot.add_layout(Arrow(end=OpenHead(size=12, line_color="grey"), 
 #                            line_color="grey",
@@ -190,16 +198,15 @@ bokeh_plot.circle(x = source_2.data['x'],
 #                            line_dash="dashed",
 #                            x_start=5.8, 
 #                            y_start=3.8, 
-#                            x_end=smallest_data[1][0], 
-#                            y_end=smallest_data[1][1]))
+#                            x_end=small_data[1][0], 
+#                            y_end=small_data[1][1]))
 
 # Label axes, place legend
 bokeh_plot.xaxis.axis_label = featureNames[0]
 bokeh_plot.yaxis.axis_label = featureNames[1]
 bokeh_plot.legend.location = "bottom_left"
-title = "k-NN decision boundary (where k = 2)"
+title = 'k-NN decision boundary (where k = 1)'
 bokeh_plot.title.text = title
 
-output_file("knn_lesson3.html")
+output_file("knn_lesson2.html")
 save(bokeh_plot)
-reset_output()
