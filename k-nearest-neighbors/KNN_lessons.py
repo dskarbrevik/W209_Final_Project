@@ -3,7 +3,7 @@ from bokeh.layouts import column
 from bokeh.models import (CategoricalColorMapper, ColumnDataSource, 
 CustomJS, Legend, Range, Range1d, Slider, Arrow, VeeHead, OpenHead, HoverTool, FixedTicker)
 from bokeh.palettes import Category20
-from bokeh.plotting import figure, output_file, save, show
+from bokeh.plotting import figure, output_file, save, show, reset_output
 
 # Import python packages
 from IPython.display import Image
@@ -202,3 +202,4 @@ bokeh_plot.title.text = title
 
 output_file("knn_lesson3.html")
 save(bokeh_plot)
+reset_output()

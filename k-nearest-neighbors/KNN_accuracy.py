@@ -13,8 +13,12 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.datasets import load_iris
 from sklearn.metrics import accuracy_score
 
+import os
+
+os.chdir("C:\\Users\\skarb\\Desktop\\Github\\W209_Final_Project\\k-nearest-neighbors\\")
+
 # Load iris data
-iris = datasets.load_iris()
+iris = load_iris()
 
 np.random.seed(1)
 
@@ -43,7 +47,8 @@ for i in range(1,11):
     bokeh_plot = figure(plot_width=500,
                         plot_height=500,
                         x_range = Range1d(0, 13, bounds = (0, 13)),
-                        y_range = Range1d(-0.04, 1.04, bounds = (-0.04, 1.04))
+                        y_range = Range1d(-0.04, 1.04, bounds = (-0.04, 1.04)),
+                        tools = "pan, box_zoom, wheel_zoom, reset, undo, redo"
                         )
 
     bokeh_plot.circle([(j+1) for j in range(i)], 
